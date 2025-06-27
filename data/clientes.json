@@ -1,0 +1,37 @@
+{
+    "cliente1@ejemplo.com": {
+        "margen": 0,
+        "nombre": "Cliente Premium",
+        "descripcion": "Cliente con margen del 0% (precio base)"
+    },
+    "cliente2@ejemplo.com": {
+        "margen": 10,
+        "nombre": "Cliente Regular",
+        "descripcion": "Cliente con margen del 10%"
+    },
+    "cliente3@ejemplo.com": {
+        "margen": 15,
+        "nombre": "Cliente Estándar",
+        "descripcion": "Cliente con margen del 15%"
+    },
+    "cliente4@ejemplo.com": {
+        "margen": 20,
+        "nombre": "Cliente Básico",
+        "descripcion": "Cliente con margen del 20%"
+    },
+    "admin@carrito.com": {
+        "margen": 0,
+        "nombre": "Administrador",
+        "descripcion": "Cuenta de administrador con precio base"
+    },
+    "vendedor@carrito.com": {
+        "margen": 5,
+        "nombre": "Vendedor",
+        "descripcion": "Cuenta de vendedor con margen del 5%"
+    },
+    "default": {
+        "margen": 25,
+        "nombre": "Cliente Nuevo",
+        "descripcion": "Margen por defecto para clientes no configurados (25%)"
+    }
+} 

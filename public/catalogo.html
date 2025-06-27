@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - Catálogo</title>
+    <link rel="stylesheet" href="../src/styles/main.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Carrito</h1>
+            <div class="user-info">
+                <span id="user-name">Bienvenido</span>
+                <button id="logout-btn">Cerrar Sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="content-wrapper">
+            <!-- Sección del Catálogo -->
+            <section class="catalogo-section">
+                <h2>Catálogo de Productos</h2>
+                <div id="productos-grid" class="productos-grid">
+                    <!-- Los productos se cargarán aquí dinámicamente -->
+                </div>
+            </section>
+
+            <!-- Sección del Carrito -->
+            <section class="carrito-section">
+                <h2>Carrito de Compras</h2>
+                <div id="carrito-vacio" class="carrito-vacio" style="display: none;">
+                    <p>Tu carrito está vacío</p>
+                </div>
+                
+                <div id="carrito-contenido" class="carrito-contenido">
+                    <table id="carrito-tabla">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio Unit.</th>
+                                <th>Subtotal</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="carrito-items">
+                            <!-- Los items del carrito se cargarán aquí -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="carrito-total">
+                        <h3>Total: $<span id="total-carrito">0.00</span></h3>
+                    </div>
+                    
+                    <div class="carrito-acciones">
+                        <button id="limpiar-carrito" class="btn-secondary">Vaciar Carrito</button>
+                        <button id="enviar-pedido" class="btn-primary">Enviar Pedido</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal para envío de pedido -->
+    <div id="modal-pedido" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Enviar Pedido</h3>
+            <div class="modal-actions">
+                <button id="enviar-email" class="btn-primary">Enviar por Email</button>
+                <button id="enviar-whatsapp" class="btn-whatsapp">Enviar por WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <!-- Tu configuración de Firebase -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCXjSGtVGfQas_cEyjmI0RTaeEl94jdp6g",
+            authDomain: "carrito-138c3.firebaseapp.com",
+            projectId: "carrito-138c3",
+            storageBucket: "carrito-138c3.firebasestorage.app",
+            messagingSenderId: "579670725719",
+            appId: "1:579670725719:web:74b5769e4bd365b4bfff12"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    
+    <script src="../src/scripts/auth.js"></script>
+    <script src="../src/scripts/catalogo.js"></script>
+    <script src="../src/scripts/carrito.js"></script>
+    <script src="../src/scripts/emailjs.js"></script>
+</body>
+</html> 

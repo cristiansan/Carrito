@@ -1,0 +1,652 @@
+[
+  {
+    "id": 1,
+    "nombre": "IPH13128BLUE-IND - APPLE IPHONE 13 128GB BLUE IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71xb2xkN5qL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 13 128GB BLUE IND - SIM CARD - Stock: 0, En tránsito: 158",
+    "precioBase": 1000.0,
+    "codigo": "IPH13128BLUE-IND",
+    "stock": 0,
+    "transit": 158
+  },
+  {
+    "id": 2,
+    "nombre": "IPH13128STL-IND - APPLE IPHONE 13 128GB STARLIGHT IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71xb2xkN5qL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 13 128GB STARLIGHT IND - SIM CARD - Stock: 194, En tránsito: 14",
+    "precioBase": 1200.0,
+    "codigo": "IPH13128STL-IND",
+    "stock": 194,
+    "transit": 14
+  },
+  {
+    "id": 3,
+    "nombre": "IPH14128MDN-CH - APPLE IPHONE 14 128GB MIDNIGHT CH - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 14 128GB MIDNIGHT CH - SIM CARD - Stock: 80",
+    "precioBase": 1300.0,
+    "codigo": "IPH14128MDN-CH",
+    "stock": 80,
+    "transit": 0
+  },
+  {
+    "id": 4,
+    "nombre": "IPH14128STL-CH - APPLE IPHONE 14 128GB STARLIGHT CH - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71GLMJ7TQiL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 14 128GB STARLIGHT CH - SIM CARD - Stock: 99",
+    "precioBase": 1300.0,
+    "codigo": "IPH14128STL-CH",
+    "stock": 99,
+    "transit": 0
+  },
+  {
+    "id": 5,
+    "nombre": "MLPF3LZ/A - APPLE IPHONE 13 128GB MIDNIGHT LAL - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71xb2xkN5qL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 13 128GB MIDNIGHT LAL - SIM CARD - Stock: 58",
+    "precioBase": 1200.0,
+    "codigo": "MLPF3LZ/A",
+    "stock": 58,
+    "transit": 0
+  },
+  {
+    "id": 6,
+    "nombre": "MQ9P3BE/A - APPLE IPHONE 14 PRO MAX 128GB SPACE BLACK BES - SI...",
+    "imagen": "https://m.media-amazon.com/images/I/61bK6PMOC3L._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 14 PRO MAX 128GB SPACE BLACK BES - SIM CARD - Stock: 10",
+    "precioBase": 1500.0,
+    "codigo": "MQ9P3BE/A",
+    "stock": 10,
+    "transit": 0
+  },
+  {
+    "id": 7,
+    "nombre": "MTP03BE/A - APPLE IPHONE 15 128GB BLACK BES - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71v2jVuMiOL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 15 128GB BLACK BES - SIM CARD - Stock: 19",
+    "precioBase": 1550.0,
+    "codigo": "MTP03BE/A",
+    "stock": 19,
+    "transit": 0
+  },
+  {
+    "id": 8,
+    "nombre": "MTP43BE/A - APPLE IPHONE 15 128GB BLUE BES - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71v2jVuMiOL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 15 128GB BLUE BES - SIM CARD - Stock: 0, En tránsito: 356",
+    "precioBase": 1550.0,
+    "codigo": "MTP43BE/A",
+    "stock": 0,
+    "transit": 356
+  },
+  {
+    "id": 9,
+    "nombre": "IPH15128GRE-IND - APPLE IPHONE 15 128GB GREEN IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71v2jVuMiOL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 15 128GB GREEN IND - SIM CARD - Stock: 13",
+    "precioBase": 1550.0,
+    "codigo": "IPH15128GRE-IND",
+    "stock": 13,
+    "transit": 0
+  },
+  {
+    "id": 10,
+    "nombre": "IPH15128BLK-IND - APPLE IPHONE 15 128GB BLACK IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71xb2xkN5qL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 15 128GB BLACK IND - SIM CARD - Stock: 76",
+    "precioBase": 1550.0,
+    "codigo": "IPH15128BLK-IND",
+    "stock": 76,
+    "transit": 0
+  },
+  {
+    "id": 11,
+    "nombre": "IPH15128PINK-IND - APPLE IPHONE 15 128GB PINK IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71pZQoOlQjL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 15 128GB PINK IND - SIM CARD - Stock: 73",
+    "precioBase": 1550.0,
+    "codigo": "IPH15128PINK-IND",
+    "stock": 73,
+    "transit": 0
+  },
+  {
+    "id": 12,
+    "nombre": "IPH16PRO128BLK - APPLE IPHONE 16 PRO 128GB BLACK TITANIUM USA - ESI...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO 128GB BLACK TITANIUM USA - ESIM - Stock: 32, En tránsito: 25",
+    "precioBase": 1600.0,
+    "codigo": "IPH16PRO128BLK",
+    "stock": 32,
+    "transit": 25
+  },
+  {
+    "id": 13,
+    "nombre": "IPH16PRO128DES - APPLE IPHONE 16 PRO 128GB DESERT TITANIUM USA - ES...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO 128GB DESERT TITANIUM USA - ESIM - Stock: 166",
+    "precioBase": 1600.0,
+    "codigo": "IPH16PRO128DES",
+    "stock": 166,
+    "transit": 0
+  },
+  {
+    "id": 14,
+    "nombre": "IPH16PRO128NAT - APPLE IPHONE 16 PRO 128GB NATURAL TITANIUM USA - E...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO 128GB NATURAL TITANIUM USA - ESIM - Stock: 26, En tránsito: 20",
+    "precioBase": 1600.0,
+    "codigo": "IPH16PRO128NAT",
+    "stock": 26,
+    "transit": 20
+  },
+  {
+    "id": 15,
+    "nombre": "IPH16PRO128WHT - APPLE IPHONE 16 PRO 128GB WHITE TITANIUM USA - ESI...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO 128GB WHITE TITANIUM USA - ESIM - Stock: 40, En tránsito: 15",
+    "precioBase": 1600.0,
+    "codigo": "IPH16PRO128WHT",
+    "stock": 40,
+    "transit": 15
+  },
+  {
+    "id": 16,
+    "nombre": "IPH16PRO256BLK - APPLE IPHONE 16 PRO 256GB BLACK TITANIUM USA - ESI...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO 256GB BLACK TITANIUM USA - ESIM - Stock: 42, En tránsito: 25",
+    "precioBase": 1650.0,
+    "codigo": "IPH16PRO256BLK",
+    "stock": 42,
+    "transit": 25
+  },
+  {
+    "id": 17,
+    "nombre": "IPH16PRO256DES - APPLE IPHONE 16 PRO 256GB DESERT TITANIUM USA - ES...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO 256GB DESERT TITANIUM USA - ESIM - Stock: 72, En tránsito: 25",
+    "precioBase": 1650.0,
+    "codigo": "IPH16PRO256DES",
+    "stock": 72,
+    "transit": 25
+  },
+  {
+    "id": 18,
+    "nombre": "IPH16PRO256NAT - APPLE IPHONE 16 PRO 256GB NATURAL TITANIUM USA - E...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO 256GB NATURAL TITANIUM USA - ESIM - Stock: 51, En tránsito: 25",
+    "precioBase": 1650.0,
+    "codigo": "IPH16PRO256NAT",
+    "stock": 51,
+    "transit": 25
+  },
+  {
+    "id": 19,
+    "nombre": "IPH16PRO256WHT - APPLE IPHONE 16 PRO 256GB WHITE TITANIUM USA - ESI...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO 256GB WHITE TITANIUM USA - ESIM - Stock: 56, En tránsito: 25",
+    "precioBase": 1650.0,
+    "codigo": "IPH16PRO256WHT",
+    "stock": 56,
+    "transit": 25
+  },
+  {
+    "id": 20,
+    "nombre": "IPH16PRO512BLK - APPLE IPHONE 16 PRO 512GB BLACK TITANIUM USA - ESI...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO 512GB BLACK TITANIUM USA - ESIM - Stock: 1",
+    "precioBase": 1800.0,
+    "codigo": "IPH16PRO512BLK",
+    "stock": 1,
+    "transit": 0
+  },
+  {
+    "id": 21,
+    "nombre": "IPH16PRO512DES - APPLE IPHONE 16 PRO 512GB DESERT TITANIUM USA - ES...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO 512GB DESERT TITANIUM USA - ESIM - Stock: 10",
+    "precioBase": 1800.0,
+    "codigo": "IPH16PRO512DES",
+    "stock": 10,
+    "transit": 0
+  },
+  {
+    "id": 22,
+    "nombre": "IPH16PRO512NAT - APPLE IPHONE 16 PRO 512GB NATURAL TITANIUM USA - E...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO 512GB NATURAL TITANIUM USA - ESIM - Stock: 11",
+    "precioBase": 1800.0,
+    "codigo": "IPH16PRO512NAT",
+    "stock": 11,
+    "transit": 0
+  },
+  {
+    "id": 23,
+    "nombre": "IPH16PRO512WHT - APPLE IPHONE 16 PRO 512GB WHITE TITANIUM USA - ESI...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO 512GB WHITE TITANIUM USA - ESIM - Stock: 6",
+    "precioBase": 1800.0,
+    "codigo": "IPH16PRO512WHT",
+    "stock": 6,
+    "transit": 0
+  },
+  {
+    "id": 24,
+    "nombre": "IPH16PMAX1BLK - APPLE IPHONE 16 PRO MAX 1TB BLACK TITANIUM USA - E...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 1TB BLACK TITANIUM USA - ESIM - Stock: 0, En tránsito: 6",
+    "precioBase": 1900.0,
+    "codigo": "IPH16PMAX1BLK",
+    "stock": 0,
+    "transit": 6
+  },
+  {
+    "id": 25,
+    "nombre": "IPH16PMAX1DES - APPLE IPHONE 16 PRO MAX 1TB DESERT TITANIUM USA - ...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 1TB DESERT TITANIUM USA - ESIM - Stock: 0, En tránsito: 2",
+    "precioBase": 1900.0,
+    "codigo": "IPH16PMAX1DES",
+    "stock": 0,
+    "transit": 2
+  },
+  {
+    "id": 26,
+    "nombre": "IPH16PMAX1WHT - APPLE IPHONE 16 PRO MAX 1TB WHITE TITANIUM USA - E...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 1TB WHITE TITANIUM USA - ESIM - Stock: 0, En tránsito: 3",
+    "precioBase": 1900.0,
+    "codigo": "IPH16PMAX1WHT",
+    "stock": 0,
+    "transit": 3
+  },
+  {
+    "id": 27,
+    "nombre": "IPH16PMAX256BLK - APPLE IPHONE 16 PRO MAX 256GB BLACK TITANIUM USA -...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 256GB BLACK TITANIUM USA - ESIM - Stock: 40, En tránsito: 40",
+    "precioBase": 1800.0,
+    "codigo": "IPH16PMAX256BLK",
+    "stock": 40,
+    "transit": 40
+  },
+  {
+    "id": 28,
+    "nombre": "IPH16PMAX256DES - APPLE IPHONE 16 PRO MAX 256GB DESERT TITANIUM USA ...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 256GB DESERT TITANIUM USA - ESIM - Stock: 39, En tránsito: 40",
+    "precioBase": 1800.0,
+    "codigo": "IPH16PMAX256DES",
+    "stock": 39,
+    "transit": 40
+  },
+  {
+    "id": 29,
+    "nombre": "IPH16PMAX256NAT - APPLE IPHONE 16 PRO MAX 256GB NATURAL TITANIUM USA...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 256GB NATURAL TITANIUM USA - ESIM - Stock: 92, En tránsito: 40",
+    "precioBase": 1800.0,
+    "codigo": "IPH16PMAX256NAT",
+    "stock": 92,
+    "transit": 40
+  },
+  {
+    "id": 30,
+    "nombre": "IPH16PMAX256WHT - APPLE IPHONE 16 PRO MAX 256GB WHITE TITANIUM USA -...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 256GB WHITE TITANIUM USA - ESIM - Stock: 88, En tránsito: 40",
+    "precioBase": 1800.0,
+    "codigo": "IPH16PMAX256WHT",
+    "stock": 88,
+    "transit": 40
+  },
+  {
+    "id": 31,
+    "nombre": "IPH16PMAX512BLK - APPLE IPHONE 16 PRO MAX 512GB BLACK TITANIUM USA -...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 512GB BLACK TITANIUM USA - ESIM - Stock: 50",
+    "precioBase": 1850.0,
+    "codigo": "IPH16PMAX512BLK",
+    "stock": 50,
+    "transit": 0
+  },
+  {
+    "id": 32,
+    "nombre": "IPH16PMAX512DES - APPLE IPHONE 16 PRO MAX 512GB DESERT TITANIUM USA ...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 512GB DESERT TITANIUM USA - ESIM - Stock: 75",
+    "precioBase": 1850.0,
+    "codigo": "IPH16PMAX512DES",
+    "stock": 75,
+    "transit": 0
+  },
+  {
+    "id": 33,
+    "nombre": "IPH16PMAX512NAT - APPLE IPHONE 16 PRO MAX 512GB NATURAL TITANIUM USA...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 512GB NATURAL TITANIUM USA - ESIM - Stock: 14",
+    "precioBase": 1850.0,
+    "codigo": "IPH16PMAX512NAT",
+    "stock": 14,
+    "transit": 0
+  },
+  {
+    "id": 34,
+    "nombre": "IPH16PMAX512WHT - APPLE IPHONE 16 PRO MAX 512GB WHITE TITANIUM USA -...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 512GB WHITE TITANIUM USA - ESIM - Stock: 7",
+    "precioBase": 1850.0,
+    "codigo": "IPH16PMAX512WHT",
+    "stock": 7,
+    "transit": 0
+  },
+  {
+    "id": 35,
+    "nombre": "IPH15128BLUE-IND - APPLE IPHONE 15 128GB BLUE IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71v2jVuMiOL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 15 128GB BLUE IND - SIM CARD - Stock: 74",
+    "precioBase": 100.0,
+    "codigo": "IPH15128BLUE-IND",
+    "stock": 74,
+    "transit": 0
+  },
+  {
+    "id": 36,
+    "nombre": "MYNK3BE/A - APPLE IPHONE 16 PRO 256GB DESERT TITANIUM BES - SI...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO 256GB DESERT TITANIUM BES - SIM CARD - Stock: 12",
+    "precioBase": 100.0,
+    "codigo": "MYNK3BE/A",
+    "stock": 12,
+    "transit": 0
+  },
+  {
+    "id": 37,
+    "nombre": "IPH16128WHT-IND - APPLE IPHONE 16 128GB WHITE IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 128GB WHITE IND - SIM CARD - Stock: 50",
+    "precioBase": 100.0,
+    "codigo": "IPH16128WHT-IND",
+    "stock": 50,
+    "transit": 0
+  },
+  {
+    "id": 38,
+    "nombre": "IPH16128TEAL-IND - APPLE IPHONE 16 128GB TEAL IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 128GB TEAL IND - SIM CARD - Stock: 78",
+    "precioBase": 100.0,
+    "codigo": "IPH16128TEAL-IND",
+    "stock": 78,
+    "transit": 0
+  },
+  {
+    "id": 39,
+    "nombre": "IPH16128UMAR-IND - APPLE IPHONE 16 128GB ULTRAMARINE IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 128GB ULTRAMARINE IND - SIM CARD - Stock: 17",
+    "precioBase": 100.0,
+    "codigo": "IPH16128UMAR-IND",
+    "stock": 17,
+    "transit": 0
+  },
+  {
+    "id": 40,
+    "nombre": "MHJA3AM/A - APPLE 20W USB-C POWER ADAPTER USA",
+    "imagen": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPvCfk6Y8L3RleHQ+PC9zdmc+",
+    "descripcion": "APPLE 20W USB-C POWER ADAPTER USA - Stock: 440",
+    "precioBase": 100.0,
+    "codigo": "MHJA3AM/A",
+    "stock": 440,
+    "transit": 0
+  },
+  {
+    "id": 41,
+    "nombre": "IPH16128BLK-CH - APPLE IPHONE 16 128GB BLACK CH - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 128GB BLACK CH - SIM CARD - Stock: 116",
+    "precioBase": 100.0,
+    "codigo": "IPH16128BLK-CH",
+    "stock": 116,
+    "transit": 0
+  },
+  {
+    "id": 42,
+    "nombre": "IPH16128WHT-CH - APPLE IPHONE 16 128GB WHITE CH - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 128GB WHITE CH - SIM CARD - Stock: 22",
+    "precioBase": 100.0,
+    "codigo": "IPH16128WHT-CH",
+    "stock": 22,
+    "transit": 0
+  },
+  {
+    "id": 43,
+    "nombre": "IPH16128UMAR-CH - APPLE IPHONE 16 128GB ULTRAMARINE CH - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 128GB ULTRAMARINE CH - SIM CARD - Stock: 69",
+    "precioBase": 100.0,
+    "codigo": "IPH16128UMAR-CH",
+    "stock": 69,
+    "transit": 0
+  },
+  {
+    "id": 44,
+    "nombre": "IPH15256BLK-IND - APPLE IPHONE 15 256GB BLACK IND- SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71v2jVuMiOL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 15 256GB BLACK IND- SIM CARD - Stock: 28",
+    "precioBase": 100.0,
+    "codigo": "IPH15256BLK-IND",
+    "stock": 28,
+    "transit": 0
+  },
+  {
+    "id": 45,
+    "nombre": "IPH15256BLUE-IND - APPLE IPHONE 15 256GB BLUE IND- SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71v2jVuMiOL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 15 256GB BLUE IND- SIM CARD - Stock: 22",
+    "precioBase": 100.0,
+    "codigo": "IPH15256BLUE-IND",
+    "stock": 22,
+    "transit": 0
+  },
+  {
+    "id": 46,
+    "nombre": "SM-S25U12512-BLK - SAMSUNG GALAXY S25 ULTRA 5G 12GB + 512GB BLACK",
+    "imagen": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPvCfk6Y8L3RleHQ+PC9zdmc+",
+    "descripcion": "SAMSUNG GALAXY S25 ULTRA 5G 12GB + 512GB BLACK - Stock: 18, En tránsito: 21",
+    "precioBase": 100.0,
+    "codigo": "SM-S25U12512-BLK",
+    "stock": 18,
+    "transit": 21
+  },
+  {
+    "id": 47,
+    "nombre": "SM-S25U12512-GREY - SAMSUNG GALAXY S25 ULTRA 5G 12GB + 512GB GREY",
+    "imagen": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPvCfk6Y8L3RleHQ+PC9zdmc+",
+    "descripcion": "SAMSUNG GALAXY S25 ULTRA 5G 12GB + 512GB GREY - Stock: 3, En tránsito: 19",
+    "precioBase": 100.0,
+    "codigo": "SM-S25U12512-GREY",
+    "stock": 3,
+    "transit": 19
+  },
+  {
+    "id": 48,
+    "nombre": "SM-S25U12512-WHT - SAMSUNG GALAXY S25 ULTRA 5G 12GB + 512GB WHITE",
+    "imagen": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPvCfk6Y8L3RleHQ+PC9zdmc+",
+    "descripcion": "SAMSUNG GALAXY S25 ULTRA 5G 12GB + 512GB WHITE - Stock: 4",
+    "precioBase": 100.0,
+    "codigo": "SM-S25U12512-WHT",
+    "stock": 4,
+    "transit": 0
+  },
+  {
+    "id": 49,
+    "nombre": "IPH16e128BLK - APPLE IPHONE 16e 128GB BLACK USA - ESIM",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16e 128GB BLACK USA - ESIM - Stock: 27, En tránsito: 225",
+    "precioBase": 100.0,
+    "codigo": "IPH16e128BLK",
+    "stock": 27,
+    "transit": 225
+  },
+  {
+    "id": 50,
+    "nombre": "IPH16e128WHT - APPLE IPHONE 16e 128GB WHITE USA - ESIM",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16e 128GB WHITE USA - ESIM - Stock: 3, En tránsito: 100",
+    "precioBase": 100.0,
+    "codigo": "IPH16e128WHT",
+    "stock": 3,
+    "transit": 100
+  },
+  {
+    "id": 51,
+    "nombre": "IPH16e256WHT - APPLE IPHONE 16e 256GB WHITE USA - ESIM",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16e 256GB WHITE USA - ESIM - Stock: 0, En tránsito: 100",
+    "precioBase": 100.0,
+    "codigo": "IPH16e256WHT",
+    "stock": 0,
+    "transit": 100
+  },
+  {
+    "id": 52,
+    "nombre": "IPH16e128BLK-IND - APPLE IPHONE 16e 128GB BLACK IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16e 128GB BLACK IND - SIM CARD - Stock: 3",
+    "precioBase": 100.0,
+    "codigo": "IPH16e128BLK-IND",
+    "stock": 3,
+    "transit": 0
+  },
+  {
+    "id": 53,
+    "nombre": "IPH16e128WHT-IND - APPLE IPHONE 16e 128GB WHITE IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16e 128GB WHITE IND - SIM CARD - Stock: 1",
+    "precioBase": 100.0,
+    "codigo": "IPH16e128WHT-IND",
+    "stock": 1,
+    "transit": 0
+  },
+  {
+    "id": 54,
+    "nombre": "IPH16PMAX256BLK-CAN - APPLE IPHONE 16 PRO MAX 256GB BLACK TITANIUM CAN- ...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 256GB BLACK TITANIUM CAN- SIM CARD - Stock: 2",
+    "precioBase": 100.0,
+    "codigo": "IPH16PMAX256BLK-CAN",
+    "stock": 2,
+    "transit": 0
+  },
+  {
+    "id": 55,
+    "nombre": "IPH16PMAX256DES-CAN - APPLE IPHONE 16 PRO MAX 256GB DESERT TITANIUM CAN-...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 256GB DESERT TITANIUM CAN- SIM CARD - Stock: 10",
+    "precioBase": 100.0,
+    "codigo": "IPH16PMAX256DES-CAN",
+    "stock": 10,
+    "transit": 0
+  },
+  {
+    "id": 56,
+    "nombre": "IPH16PMAX256NAT-CAN - APPLE IPHONE 16 PRO MAX 256GB NATURAL TITANIUM CAN...",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 256GB NATURAL TITANIUM CAN- SIM CARD - Stock: 22",
+    "precioBase": 100.0,
+    "codigo": "IPH16PMAX256NAT-CAN",
+    "stock": 22,
+    "transit": 0
+  },
+  {
+    "id": 57,
+    "nombre": "IPH15256GRE-IND - APPLE IPHONE 15 256GB GREEN IND- SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71v2jVuMiOL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 15 256GB GREEN IND- SIM CARD - Stock: 14",
+    "precioBase": 100.0,
+    "codigo": "IPH15256GRE-IND",
+    "stock": 14,
+    "transit": 0
+  },
+  {
+    "id": 58,
+    "nombre": "IPH16256WHT-IND - APPLE IPHONE 16 256GB WHITE IND - SIM CARD",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 256GB WHITE IND - SIM CARD - Stock: 26",
+    "precioBase": 100.0,
+    "codigo": "IPH16256WHT-IND",
+    "stock": 26,
+    "transit": 0
+  },
+  {
+    "id": 59,
+    "nombre": "IPH16256UMAR-IND - APPLE IPHONE 16 256GB ULTRAMARINE IND - SIM CARD",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 256GB ULTRAMARINE IND - SIM CARD - Stock: 25",
+    "precioBase": 100.0,
+    "codigo": "IPH16256UMAR-IND",
+    "stock": 25,
+    "transit": 0
+  },
+  {
+    "id": 60,
+    "nombre": "IPH16256TEAL-IND - APPLE IPHONE 16 256GB TEAL IND - SIM CARD",
+    "imagen": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+    "descripcion": "APPLE IPHONE 16 256GB TEAL IND - SIM CARD - Stock: 27",
+    "precioBase": 100.0,
+    "codigo": "IPH16256TEAL-IND",
+    "stock": 27,
+    "transit": 0
+  },
+  {
+    "id": 61,
+    "nombre": "IPH14128RED-IND - APPLE IPHONE 14 128GB RED IND - SIM CARD",
+    "imagen": "https://m.media-amazon.com/images/I/71ZOtNdaZCL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 14 128GB RED IND - SIM CARD - Stock: 3",
+    "precioBase": 100.0,
+    "codigo": "IPH14128RED-IND",
+    "stock": 3,
+    "transit": 0
+  },
+  {
+    "id": 62,
+    "nombre": "SM-R630NZAAXAR - SAMSUNG GALAXY BUDS PRO 3 SILVER NEW LATAM",
+    "imagen": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPvCfk6Y8L3RleHQ+PC9zdmc+",
+    "descripcion": "SAMSUNG GALAXY BUDS PRO 3 SILVER NEW LATAM - Stock: 15",
+    "precioBase": 100.0,
+    "codigo": "SM-R630NZAAXAR",
+    "stock": 15,
+    "transit": 0
+  },
+  {
+    "id": 63,
+    "nombre": "IPH16PMAX512BLK-CAN - APPLE IPHONE 16 PRO MAX 512GB BLACK TITANIUM CAN -...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 512GB BLACK TITANIUM CAN - SIM CARD - Stock: 1",
+    "precioBase": 100.0,
+    "codigo": "IPH16PMAX512BLK-CAN",
+    "stock": 1,
+    "transit": 0
+  },
+  {
+    "id": 64,
+    "nombre": "IPH16PMAX512DES-CAN - APPLE IPHONE 16 PRO MAX 512GB DESERT TITANIUM CAN ...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 512GB DESERT TITANIUM CAN - SIM CARD - Stock: 2",
+    "precioBase": 100.0,
+    "codigo": "IPH16PMAX512DES-CAN",
+    "stock": 2,
+    "transit": 0
+  },
+  {
+    "id": 65,
+    "nombre": "IPH16PMAX512NAT-CAN - APPLE IPHONE 16 PRO MAX 512GB NATURAL TITANIUM CAN...",
+    "imagen": "https://m.media-amazon.com/images/I/71FuI8YvCNL._AC_SX679_.jpg",
+    "descripcion": "APPLE IPHONE 16 PRO MAX 512GB NATURAL TITANIUM CAN - SIM CARD - Stock: 5",
+    "precioBase": 100.0,
+    "codigo": "IPH16PMAX512NAT-CAN",
+    "stock": 5,
+    "transit": 0
+  }
+]
