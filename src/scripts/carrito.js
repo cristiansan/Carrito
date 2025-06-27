@@ -25,6 +25,12 @@ function guardarCarrito() {
 
 // Agregar item al carrito
 function addToCart(item) {
+    // Verificar si el usuario está logueado
+    if (!isAuthenticated()) {
+        mostrarModalLoginRequerido();
+        return;
+    }
+    
     // Verificar si el producto ya existe en el carrito
     const itemExistente = carrito.find(cartItem => cartItem.id === item.id);
     
@@ -39,6 +45,11 @@ function addToCart(item) {
     
     guardarCarrito();
     actualizarVistaCarrito();
+    
+    // Mostrar carrito flotante en móvil después de agregar producto
+    if (window.innerWidth <= 480) {
+        mostrarCarritoFlotante();
+    }
 }
 
 // Eliminar item del carrito
@@ -107,7 +118,6 @@ function actualizarVistaCarrito() {
                            min="1" onchange="actualizarCantidad(${item.id}, this.value)">
                 </td>
                 <td>$${item.precio.toFixed(2)}</td>
-                <td>$${item.subtotal.toFixed(2)}</td>
                 <td>
                     <button class="btn-eliminar" onclick="eliminarDelCarrito(${item.id})">
                         Eliminar
@@ -120,6 +130,9 @@ function actualizarVistaCarrito() {
         // Actualizar total
         totalCarrito.textContent = calcularTotal().toFixed(2);
     }
+    
+    // Restablecer event listeners después de actualizar el carrito
+    restablecerEventListeners();
 }
 
 // Generar resumen del pedido para envío
@@ -151,6 +164,13 @@ function generarResumenPedido() {
 
 // Mostrar modal de envío
 function mostrarModalEnvio() {
+    // Verificar si el usuario está logueado
+    if (!isAuthenticated()) {
+        alert('Debes iniciar sesión para realizar un pedido');
+        irALogin();
+        return;
+    }
+    
     if (carrito.length === 0) {
         alert('El carrito está vacío');
         return;
@@ -230,5 +250,129 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
+        
+        // Event listeners para modal de login requerido
+        const modalLoginRequerido = document.getElementById('modal-login-requerido');
+        if (modalLoginRequerido) {
+            modalLoginRequerido.addEventListener('click', function(e) {
+                if (e.target === modalLoginRequerido) {
+                    cerrarModalLoginRequerido();
+                }
+            });
+        }
+    }
+});
+
+// Funciones para carrito flotante en móviles
+function mostrarCarritoFlotante() {
+    const carritoFlotante = document.getElementById('carrito-flotante');
+    if (carritoFlotante) {
+        carritoFlotante.classList.add('show');
+        actualizarVistaCarritoFlotante();
+    }
+}
+
+function cerrarCarritoFlotante() {
+    const carritoFlotante = document.getElementById('carrito-flotante');
+    if (carritoFlotante) {
+        carritoFlotante.classList.remove('show');
+    }
+}
+
+// Actualizar vista del carrito flotante
+function actualizarVistaCarritoFlotante() {
+    const carritoVacioFlotante = document.getElementById('carrito-vacio-flotante');
+    const carritoContenidoFlotante = document.getElementById('carrito-contenido-flotante');
+    const carritoItemsFlotante = document.getElementById('carrito-items-flotante');
+    const totalCarritoFlotante = document.getElementById('total-carrito-flotante');
+    
+    if (!carritoItemsFlotante || !totalCarritoFlotante) return;
+    
+    if (carrito.length === 0) {
+        // Mostrar mensaje de carrito vacío
+        if (carritoVacioFlotante) carritoVacioFlotante.style.display = 'block';
+        if (carritoContenidoFlotante) carritoContenidoFlotante.style.display = 'none';
+    } else {
+        // Mostrar contenido del carrito
+        if (carritoVacioFlotante) carritoVacioFlotante.style.display = 'none';
+        if (carritoContenidoFlotante) carritoContenidoFlotante.style.display = 'block';
+        
+        // Actualizar tabla de items (versión compacta para móvil)
+        carritoItemsFlotante.innerHTML = '';
+        
+                 carrito.forEach(item => {
+             const fila = document.createElement('tr');
+             fila.innerHTML = `
+                 <td style="font-size: 12px;">${item.nombre.substring(0, 20)}${item.nombre.length > 20 ? '...' : ''}</td>
+                 <td>
+                     <input type="number" class="item-cantidad" value="${item.cantidad}" 
+                            min="1" style="width: 50px; font-size: 12px;" 
+                            onchange="actualizarCantidad(${item.id}, this.value)">
+                 </td>
+                 <td style="font-size: 12px;">$${item.precio.toFixed(2)}</td>
+                 <td>
+                     <button class="btn-eliminar" onclick="eliminarDelCarrito(${item.id})" 
+                             style="padding: 4px 8px; font-size: 12px;">
+                         ❌
+                     </button>
+                 </td>
+             `;
+             carritoItemsFlotante.appendChild(fila);
+         });
+        
+        // Actualizar total
+        totalCarritoFlotante.textContent = calcularTotal().toFixed(2);
+    }
+    
+    // Restablecer event listeners después de actualizar el carrito flotante
+    restablecerEventListeners();
+}
+
+// Función para restablecer event listeners después de actualizar el carrito
+function restablecerEventListeners() {
+    // Restablecer event listener del botón logout si existe
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn && logoutBtn.style.display !== 'none') {
+        logoutBtn.removeEventListener('click', cerrarSesion);
+        logoutBtn.addEventListener('click', cerrarSesion);
+        console.log('Event listener del logout restablecido desde carrito');
+    }
+}
+
+// Funciones para modal de login requerido
+function mostrarModalLoginRequerido() {
+    const modal = document.getElementById('modal-login-requerido');
+    if (modal) {
+        modal.style.display = 'flex';
+    }
+}
+
+function cerrarModalLoginRequerido() {
+    const modal = document.getElementById('modal-login-requerido');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+
+
+// Event listeners adicionales para carrito flotante
+document.addEventListener('DOMContentLoaded', function() {
+    // Event listener para limpiar carrito flotante
+    const limpiarBtnFlotante = document.getElementById('limpiar-carrito-flotante');
+    if (limpiarBtnFlotante) {
+        limpiarBtnFlotante.addEventListener('click', function() {
+            limpiarCarrito();
+            cerrarCarritoFlotante();
+        });
+    }
+    
+    // Event listener para enviar pedido flotante
+    const enviarBtnFlotante = document.getElementById('enviar-pedido-flotante');
+    if (enviarBtnFlotante) {
+        enviarBtnFlotante.addEventListener('click', function() {
+            mostrarModalEnvio();
+            cerrarCarritoFlotante();
+        });
     }
 }); 

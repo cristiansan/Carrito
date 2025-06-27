@@ -2,9 +2,9 @@
 
 // Configuración de EmailJS
 const EMAILJS_CONFIG = {
-    publicKey: 'tu-public-key', // Reemplazar con tu Public Key de EmailJS
-    serviceId: 'tu-service-id', // Reemplazar con tu Service ID
-    templateId: 'tu-template-id' // Reemplazar con tu Template ID
+    publicKey: 'VC334AV-Tayb9YEXP', // Public Key de EmailJS
+    serviceId: 'service_v34nw7r', // Service ID actualizado
+    templateId: 'template_noh77qr' // Template ID
 };
 
 // Verificar si EmailJS está configurado
@@ -69,16 +69,19 @@ ${resumenPedido}`);
         const user = getCurrentUser();
         const resumenPedido = generarResumenPedido();
         
-        // Preparar datos del email
+        // Preparar datos del email con parámetros simplificados
         const templateParams = {
-            to_email: 'cristiansan@gmail.com', // Email de destino actualizado
-            from_name: user ? (user.displayName || user.email.split('@')[0]) : 'Usuario',
-            from_email: user ? user.email : 'desconocido@email.com',
-            subject: `Nuevo Pedido - ${new Date().toLocaleDateString('es-ES')}`,
+            to_name: 'Administrador',
+            from_name: user ? (user.displayName || user.email.split('@')[0]) : 'Invitado',
+            from_email: user ? user.email : 'invitado@tienda.com',
             message: resumenPedido,
-            order_total: calcularTotal().toFixed(2),
-            order_date: new Date().toLocaleString('es-ES')
+            reply_to: user ? user.email : 'invitado@tienda.com'
         };
+
+        // Debug: Mostrar parámetros que se van a enviar
+        console.log('Enviando email con parámetros:', templateParams);
+        console.log('Service ID:', EMAILJS_CONFIG.serviceId);
+        console.log('Template ID:', EMAILJS_CONFIG.templateId);
 
         // Enviar email
         const response = await emailjs.send(
@@ -106,8 +109,21 @@ ${resumenPedido}`);
         actualizarVistaCarrito();
 
     } catch (error) {
-        console.error('Error al enviar email:', error);
-        alert('Error al enviar el pedido por email. Por favor, intenta nuevamente.');
+        console.error('Error completo al enviar email:', error);
+        console.error('Tipo de error:', typeof error);
+        console.error('Error status:', error.status);
+        console.error('Error text:', error.text);
+        
+        let mensajeError = 'Error al enviar el pedido por email.';
+        if (error.status === 412) {
+            mensajeError = 'Error 412: Problema con el template de EmailJS. Verifica la configuración del template.';
+        } else if (error.status === 400) {
+            mensajeError = 'Error 400: Datos inválidos enviados a EmailJS.';
+        } else if (error.status === 401) {
+            mensajeError = 'Error 401: Credenciales de EmailJS inválidas.';
+        }
+        
+        alert(mensajeError + ' Por favor, intenta nuevamente.');
     } finally {
         // Restaurar botón
         const emailBtn = document.getElementById('enviar-email');

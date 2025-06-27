@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito - Catálogo</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
     <link rel="stylesheet" href="../src/styles/main.css">
 </head>
 <body>
@@ -11,8 +12,9 @@
         <div class="container">
             <h1>Carrito</h1>
             <div class="user-info">
-                <span id="user-name">Bienvenido</span>
-                <button id="logout-btn">Cerrar Sesión</button>
+                <span id="user-name">Visitando como invitado</span>
+                <button id="login-btn" onclick="irALogin()" style="background: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Iniciar Sesión</button>
+                <button id="logout-btn" style="display: none;">Cerrar Sesión</button>
             </div>
         </div>
     </header>
@@ -22,8 +24,55 @@
             <!-- Sección del Catálogo -->
             <section class="catalogo-section">
                 <h2>Catálogo de Productos</h2>
-                <div id="productos-grid" class="productos-grid">
-                    <!-- Los productos se cargarán aquí dinámicamente -->
+                
+                <!-- Filtros -->
+                <div class="filtros-section">
+                    <div class="filtros-container">
+                        <div class="filtro-grupo">
+                            <label for="filtro-modelo">Modelo:</label>
+                            <select id="filtro-modelo">
+                                <option value="">Todos los modelos</option>
+                                <option value="iPhone 13">iPhone 13</option>
+                                <option value="iPhone 14">iPhone 14</option>
+                                <option value="iPhone 14 Pro Max">iPhone 14 Pro Max</option>
+                                <option value="iPhone 15">iPhone 15</option>
+                                <option value="iPhone 16">iPhone 16</option>
+                                <option value="iPhone 16e">iPhone 16e</option>
+                                <option value="iPhone 16 Pro">iPhone 16 Pro</option>
+                                <option value="iPhone 16 Pro Max">iPhone 16 Pro Max</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filtro-grupo">
+                            <label for="filtro-capacidad">Capacidad:</label>
+                            <select id="filtro-capacidad">
+                                <option value="">Todas las capacidades</option>
+                                <option value="128GB">128GB</option>
+                                <option value="256GB">256GB</option>
+                                <option value="512GB">512GB</option>
+                                <option value="1TB">1TB</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filtro-grupo">
+                            <label for="filtro-disponibilidad">Disponibilidad:</label>
+                            <select id="filtro-disponibilidad">
+                                <option value="">Todos</option>
+                                <option value="stock">En stock</option>
+                                <option value="transito">En tránsito</option>
+                                <option value="disponible">Disponible (stock + tránsito)</option>
+                            </select>
+                        </div>
+                        
+                        <button id="limpiar-filtros" class="btn-secondary">Limpiar Filtros</button>
+                    </div>
+                </div>
+                
+                <!-- Contenedor con scroll para productos -->
+                <div class="catalogo-content">
+                    <div id="productos-grid" class="productos-grid">
+                        <!-- Los productos se cargarán aquí dinámicamente -->
+                    </div>
                 </div>
             </section>
 
@@ -41,7 +90,6 @@
                                 <th>Producto</th>
                                 <th>Cantidad</th>
                                 <th>Precio Unit.</th>
-                                <th>Subtotal</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -63,6 +111,44 @@
         </div>
     </main>
 
+    <!-- Carrito flotante para móviles -->
+    <div id="carrito-flotante" class="carrito-flotante">
+        <div class="carrito-flotante-header">
+            <span>🛒 Carrito de Compras</span>
+            <button class="carrito-flotante-close" onclick="cerrarCarritoFlotante()">&times;</button>
+        </div>
+        <div class="carrito-flotante-content">
+            <div id="carrito-vacio-flotante" class="carrito-vacio" style="display: none;">
+                <p>Tu carrito está vacío</p>
+            </div>
+            
+            <div id="carrito-contenido-flotante" class="carrito-contenido">
+                <table id="carrito-tabla-flotante">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cant.</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="carrito-items-flotante">
+                        <!-- Los items del carrito se cargarán aquí -->
+                    </tbody>
+                </table>
+                
+                <div class="carrito-total">
+                    <h3>Total: $<span id="total-carrito-flotante">0.00</span></h3>
+                </div>
+                
+                <div class="carrito-acciones">
+                    <button id="limpiar-carrito-flotante" class="btn-secondary">Vaciar Carrito</button>
+                    <button id="enviar-pedido-flotante" class="btn-primary">Enviar Pedido</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal para envío de pedido -->
     <div id="modal-pedido" class="modal" style="display: none;">
         <div class="modal-content">
@@ -71,6 +157,22 @@
             <div class="modal-actions">
                 <button id="enviar-email" class="btn-primary">Enviar por Email</button>
                 <button id="enviar-whatsapp" class="btn-whatsapp">Enviar por WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para login requerido -->
+    <div id="modal-login-requerido" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModalLoginRequerido()">&times;</span>
+            <div style="text-align: center;">
+                <div style="font-size: 48px; margin-bottom: 20px;">🔒</div>
+                <h3>Inicia Sesión para Continuar</h3>
+                <p style="margin: 20px 0; color: #666;">Necesitas iniciar sesión para agregar productos al carrito y realizar compras.</p>
+                <div class="modal-actions">
+                    <button id="btn-ir-login" class="btn-primary" onclick="irALogin()">Iniciar Sesión</button>
+                    <button class="btn-secondary" onclick="cerrarModalLoginRequerido()">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>
