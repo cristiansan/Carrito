@@ -7,8 +7,20 @@ const EMAILJS_CONFIG = {
     templateId: 'tu-template-id' // Reemplazar con tu Template ID
 };
 
+// Verificar si EmailJS está configurado
+function isEmailJSConfigured() {
+    return EMAILJS_CONFIG.publicKey !== 'tu-public-key' && 
+           EMAILJS_CONFIG.serviceId !== 'tu-service-id' && 
+           EMAILJS_CONFIG.templateId !== 'tu-template-id';
+}
+
 // Inicializar EmailJS
 function inicializarEmailJS() {
+    if (!isEmailJSConfigured()) {
+        console.log('EmailJS no configurado - usando modo demo');
+        return;
+    }
+    
     if (typeof emailjs !== 'undefined') {
         emailjs.init(EMAILJS_CONFIG.publicKey);
         console.log('EmailJS inicializado');
@@ -21,6 +33,28 @@ function inicializarEmailJS() {
 async function enviarPedidoPorEmail() {
     if (carrito.length === 0) {
         alert('El carrito está vacío');
+        return;
+    }
+
+    // Si EmailJS no está configurado, mostrar mensaje informativo
+    if (!isEmailJSConfigured()) {
+        const resumenPedido = generarResumenPedido();
+        
+        alert(`📧 EmailJS no está configurado aún.
+        
+Por ahora, puedes copiar este resumen y enviarlo manualmente a: cristiansan@gmail.com
+
+${resumenPedido}`);
+        
+        // Copiar al portapapeles si es posible
+        if (navigator.clipboard) {
+            try {
+                await navigator.clipboard.writeText(resumenPedido);
+                alert('✅ Resumen copiado al portapapeles');
+            } catch (err) {
+                console.log('No se pudo copiar al portapapeles');
+            }
+        }
         return;
     }
 
@@ -37,7 +71,7 @@ async function enviarPedidoPorEmail() {
         
         // Preparar datos del email
         const templateParams = {
-            to_email: 'tu-email@ejemplo.com', // Reemplazar con tu email
+            to_email: 'cristiansan@gmail.com', // Email de destino actualizado
             from_name: user ? (user.displayName || user.email.split('@')[0]) : 'Usuario',
             from_email: user ? user.email : 'desconocido@email.com',
             subject: `Nuevo Pedido - ${new Date().toLocaleDateString('es-ES')}`,

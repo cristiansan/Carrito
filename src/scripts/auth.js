@@ -3,23 +3,65 @@
 // Variables globales
 let currentUser = null;
 
+// Función para detectar si estamos en la página de login
+function isLoginPage() {
+    const path = window.location.pathname;
+    return path.includes('index.html') || path === '/' || path.endsWith('/Carrito/') || path.endsWith('/Carrito');
+}
+
+// Función para detectar si estamos en la página de catálogo
+function isCatalogPage() {
+    return window.location.pathname.includes('catalogo.html');
+}
+
+// Función para redirigir al catálogo
+function redirectToCatalog() {
+    // Detectar si estamos en GitHub Pages o en local
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    
+    if (isGitHubPages) {
+        window.location.href = 'public/catalogo.html';
+    } else {
+        // En local, usar ruta relativa
+        window.location.href = 'public/catalogo.html';
+    }
+}
+
+// Función para redirigir al login
+function redirectToLogin() {
+    // Detectar si estamos en GitHub Pages o en local
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    
+    if (isGitHubPages) {
+        window.location.href = '/Carrito/';
+    } else {
+        // En local, ir a la raíz
+        window.location.href = '/';
+    }
+}
+
 // Verificar estado de autenticación al cargar la página
 firebase.auth().onAuthStateChanged((user) => {
+    console.log('Estado de auth cambió:', user ? 'Logueado' : 'No logueado');
+    console.log('Página actual:', window.location.pathname);
+    
     if (user) {
         currentUser = user;
         // Si estamos en login y ya hay usuario, redirigir al catálogo
-        if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
-            window.location.href = 'public/catalogo.html';
+        if (isLoginPage()) {
+            console.log('Usuario logueado en página de login, redirigiendo al catálogo...');
+            redirectToCatalog();
         }
         // Si estamos en catálogo, mostrar info del usuario
-        if (window.location.pathname.includes('catalogo.html')) {
+        if (isCatalogPage()) {
             mostrarInfoUsuario(user);
         }
     } else {
         currentUser = null;
         // Si no hay usuario y no estamos en login, redirigir
-        if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
-            window.location.href = '../index.html';
+        if (!isLoginPage()) {
+            console.log('Usuario no logueado fuera del login, redirigiendo...');
+            redirectToLogin();
         }
     }
 });
@@ -67,7 +109,7 @@ function iniciarSesion(email, password) {
 function cerrarSesion() {
     firebase.auth().signOut().then(() => {
         console.log('Sesión cerrada');
-        window.location.href = '../index.html';
+        redirectToLogin();
     }).catch((error) => {
         console.error('Error al cerrar sesión:', error);
     });

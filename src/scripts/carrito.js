@@ -173,7 +173,7 @@ function cerrarModal() {
 // Generar link de WhatsApp
 function generarLinkWhatsApp() {
     const resumen = generarResumenPedido();
-    const numeroWhatsApp = '+1234567890'; // Reemplazar con tu número
+    const numeroWhatsApp = '+541166251922'; // Número de WhatsApp actualizado
     const mensaje = encodeURIComponent(resumen);
     return `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
 }
