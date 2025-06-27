@@ -379,6 +379,29 @@ button, .btn-primary, .btn-secondary, .btn-whatsapp {
     justify-content: center;
 }
 
+/* Modal de login requerido */
+#modal-login-requerido .modal-content {
+    max-width: 400px;
+    text-align: center;
+}
+
+#modal-login-requerido h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#modal-login-requerido p {
+    line-height: 1.5;
+}
+
+#btn-ir-login {
+    background: #007bff !important;
+}
+
+#btn-ir-login:hover {
+    background: #0056b3 !important;
+}
+
 /* Página de éxito */
 .success-message {
     text-align: center;
