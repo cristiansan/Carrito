@@ -9,7 +9,7 @@ firebase.auth().onAuthStateChanged((user) => {
         currentUser = user;
         // Si estamos en login y ya hay usuario, redirigir al catálogo
         if (window.location.pathname.includes('index.html') || window.location.pathname === '/') {
-            window.location.href = 'catalogo.html';
+            window.location.href = 'public/catalogo.html';
         }
         // Si estamos en catálogo, mostrar info del usuario
         if (window.location.pathname.includes('catalogo.html')) {
@@ -19,7 +19,7 @@ firebase.auth().onAuthStateChanged((user) => {
         currentUser = null;
         // Si no hay usuario y no estamos en login, redirigir
         if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
-            window.location.href = 'index.html';
+            window.location.href = '../index.html';
         }
     }
 });
@@ -67,7 +67,7 @@ function iniciarSesion(email, password) {
 function cerrarSesion() {
     firebase.auth().signOut().then(() => {
         console.log('Sesión cerrada');
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
     }).catch((error) => {
         console.error('Error al cerrar sesión:', error);
     });
