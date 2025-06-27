@@ -57,50 +57,79 @@ async function inicializarCatalogo() {
 
 // Cargar productos desde JSON
 async function cargarProductos() {
-    try {
-        const response = await fetch('/data/productos.json');
-        if (!response.ok) throw new Error('No se pudieron cargar los productos');
-        productos = await response.json();
-        console.log('Productos cargados:', productos);
-    } catch (error) {
-        console.error('Error cargando productos:', error);
-        // Productos de ejemplo si falla la carga
-        productos = [
-            {
-                id: 1,
-                nombre: "iPhone 13 128GB - Ejemplo",
-                imagen: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=300&fit=crop",
-                descripcion: "Producto de ejemplo - Error al cargar datos reales",
-                precioBase: 1000,
-                codigo: "EJEMPLO-001"
-            },
-            {
-                id: 2,
-                nombre: "iPhone 14 128GB - Ejemplo",
-                imagen: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
-                descripcion: "Producto de ejemplo - Error al cargar datos reales",
-                precioBase: 1200,
-                codigo: "EJEMPLO-002"
+    const posiblesRutas = [
+        './data/productos.json',           // Relativa desde la página actual
+        '../data/productos.json',          // Relativa desde public/
+        '/data/productos.json',            // Absoluta desde raíz
+        '/Carrito/data/productos.json'     // GitHub Pages
+    ];
+    
+    for (const ruta of posiblesRutas) {
+        try {
+            console.log(`Intentando cargar productos desde: ${ruta}`);
+            const response = await fetch(ruta);
+            if (response.ok) {
+                productos = await response.json();
+                console.log(`Productos cargados exitosamente desde: ${ruta}`, productos.length, 'productos');
+                return;
             }
-        ];
-        console.log('Usando productos de ejemplo:', productos);
+        } catch (error) {
+            console.log(`Error con ruta ${ruta}:`, error.message);
+        }
     }
+    
+    // Si ninguna ruta funcionó, usar productos de ejemplo
+    console.error('No se pudieron cargar los productos desde ninguna ruta');
+    productos = [
+        {
+            id: 1,
+            nombre: "iPhone 13 128GB - Ejemplo",
+            imagen: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=300&fit=crop",
+            descripcion: "Producto de ejemplo - Error al cargar datos reales",
+            precioBase: 1000,
+            codigo: "EJEMPLO-001"
+        },
+        {
+            id: 2,
+            nombre: "iPhone 14 128GB - Ejemplo",
+            imagen: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop",
+            descripcion: "Producto de ejemplo - Error al cargar datos reales",
+            precioBase: 1200,
+            codigo: "EJEMPLO-002"
+        }
+    ];
+    console.log('Usando productos de ejemplo:', productos);
 }
 
 // Cargar configuración de clientes desde JSON
 async function cargarClientes() {
-    try {
-        const response = await fetch('/data/clientes.json');
-        if (!response.ok) throw new Error('No se pudieron cargar los clientes');
-        clientes = await response.json();
-        console.log('Clientes cargados:', clientes);
-    } catch (error) {
-        console.error('Error cargando clientes:', error);
-        // Configuración por defecto
-        clientes = {
-            "default": { margen: 0 }
-        };
+    const posiblesRutas = [
+        './data/clientes.json',           // Relativa desde la página actual
+        '../data/clientes.json',          // Relativa desde public/
+        '/data/clientes.json',            // Absoluta desde raíz
+        '/Carrito/data/clientes.json'     // GitHub Pages
+    ];
+    
+    for (const ruta of posiblesRutas) {
+        try {
+            console.log(`Intentando cargar clientes desde: ${ruta}`);
+            const response = await fetch(ruta);
+            if (response.ok) {
+                clientes = await response.json();
+                console.log(`Clientes cargados exitosamente desde: ${ruta}`);
+                return;
+            }
+        } catch (error) {
+            console.log(`Error con ruta ${ruta}:`, error.message);
+        }
     }
+    
+    // Si ninguna ruta funcionó, usar configuración por defecto
+    console.error('No se pudieron cargar los clientes desde ninguna ruta');
+    clientes = {
+        "default": { margen: 0 }
+    };
+    console.log('Usando configuración de clientes por defecto');
 }
 
 // Obtener margen del usuario actual
