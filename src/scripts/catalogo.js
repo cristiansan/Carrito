@@ -57,8 +57,16 @@ async function inicializarCatalogo() {
 
 // Cargar productos desde JSON
 async function cargarProductos() {
-    const posiblesRutas = [
+    // Determinar la ruta más probable según la ubicación actual
+    const esPublicFolder = window.location.pathname.includes('/public/');
+    
+    const posiblesRutas = esPublicFolder ? [
+        '../data/productos.json',          // Relativa desde public/ (más probable)
         './data/productos.json',           // Relativa desde la página actual
+        '/data/productos.json',            // Absoluta desde raíz
+        '/Carrito/data/productos.json'     // GitHub Pages
+    ] : [
+        './data/productos.json',           // Relativa desde la página actual (más probable)
         '../data/productos.json',          // Relativa desde public/
         '/data/productos.json',            // Absoluta desde raíz
         '/Carrito/data/productos.json'     // GitHub Pages
@@ -103,8 +111,16 @@ async function cargarProductos() {
 
 // Cargar configuración de clientes desde JSON
 async function cargarClientes() {
-    const posiblesRutas = [
+    // Determinar la ruta más probable según la ubicación actual
+    const esPublicFolder = window.location.pathname.includes('/public/');
+    
+    const posiblesRutas = esPublicFolder ? [
+        '../data/clientes.json',          // Relativa desde public/ (más probable)
         './data/clientes.json',           // Relativa desde la página actual
+        '/data/clientes.json',            // Absoluta desde raíz
+        '/Carrito/data/clientes.json'     // GitHub Pages
+    ] : [
+        './data/clientes.json',           // Relativa desde la página actual (más probable)
         '../data/clientes.json',          // Relativa desde public/
         '/data/clientes.json',            // Absoluta desde raíz
         '/Carrito/data/clientes.json'     // GitHub Pages
