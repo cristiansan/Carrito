@@ -209,6 +209,163 @@
     font-weight: 500;
 }
 
+/* Indicador de versión */
+.version-indicator {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 var(--spacing-sm);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.version-indicator:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+[data-theme="light"] .version-indicator {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .version-indicator:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Modal de changelog */
+.changelog-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.changelog-modal-content {
+    background-color: var(--bg-card);
+    margin: 5% auto;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-xl);
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.changelog-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.changelog-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.changelog-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s ease;
+}
+
+.changelog-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.changelog-body {
+    padding: var(--spacing-lg);
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.changelog-version {
+    margin-bottom: var(--spacing-lg);
+    border-left: 3px solid var(--primary-color);
+    padding-left: var(--spacing-md);
+}
+
+.changelog-version:last-child {
+    margin-bottom: 0;
+}
+
+.version-header {
+    margin-bottom: var(--spacing-sm);
+}
+
+.version-number {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.changelog-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.changelog-item {
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s ease;
+}
+
+.changelog-item:hover {
+    background: var(--hover-bg);
+}
+
+.changelog-item:last-child {
+    margin-bottom: 0;
+}
+
+.changelog-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+}
+
 /* Responsivo para móviles */
 @media (max-width: 768px) {
     .theme-selector {
@@ -227,6 +384,29 @@
     
     .theme-icon {
         font-size: 0.9rem;
+    }
+    
+    .version-indicator {
+        margin: 0 var(--spacing-xs);
+        padding: var(--spacing-xs);
+        font-size: 0.65rem;
+    }
+    
+    .changelog-modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .changelog-header {
+        padding: var(--spacing-md);
+    }
+    
+    .changelog-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .changelog-body {
+        padding: var(--spacing-md);
     }
 }
 

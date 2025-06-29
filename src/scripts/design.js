@@ -1,6 +1,91 @@
 // Design System Manager
 let designConfig = null;
 
+// Versión actual del sitio
+const SITE_VERSION = 'v0.1.12';
+
+// Historial de cambios (ordenado cronológicamente - más reciente primero)
+const CHANGELOG = [
+    {
+        version: 'v0.1.12',
+        changes: [
+            { text: 'Modal de historial de cambios y versiones' }
+        ]
+    },
+    {
+        version: 'v0.1.11',
+        changes: [
+            { text: 'Selector de tema oscuro/claro integrado en header' }
+        ]
+    },
+    {
+        version: 'v0.1.10',
+        changes: [
+            { text: 'Indicadores visuales de stock (verde/amarillo/rojo)' }
+        ]
+    },
+    {
+        version: 'v0.1.9',
+        changes: [
+            { text: 'Validaciones de stock y productos disponibles' }
+        ]
+    },
+    {
+        version: 'v0.1.8',
+        changes: [
+            { text: 'Gestión de stock temporal en tiempo real' }
+        ]
+    },
+    {
+        version: 'v0.1.7',
+        changes: [
+            { text: 'Sistema de filtros avanzado por modelo y capacidad' }
+        ]
+    },
+    {
+        version: 'v0.1.6',
+        changes: [
+            { text: 'Sistema de envío de pedidos por Email y WhatsApp' }
+        ]
+    },
+    {
+        version: 'v0.1.5',
+        changes: [
+            { text: 'Carrito de compras funcional con persistencia' }
+        ]
+    },
+    {
+        version: 'v0.1.4',
+        changes: [
+            { text: 'Diseño completamente responsivo para múltiples dispositivos' }
+        ]
+    },
+    {
+        version: 'v0.1.3',
+        changes: [
+            { text: 'Conversión de Excel a JSON para mejorar velocidad de carga' }
+        ]
+    },
+    {
+        version: 'v0.1.2',
+        changes: [
+            { text: 'Listado de productos leído desde archivo Excel' }
+        ]
+    },
+    {
+        version: 'v0.1.1',
+        changes: [
+            { text: 'Sistema de autenticación con Firebase' }
+        ]
+    },
+    {
+        version: 'v0.1.0',
+        changes: [
+            { text: 'Lanzamiento inicial del sitio web de Carrito' }
+        ]
+    }
+];
+
 // Cargar configuración de diseño
 async function loadDesignConfig() {
     try {
@@ -247,6 +332,10 @@ function createThemeSelector() {
         
         // Insertar el selector después del título
         headerLeft.appendChild(themeSelector);
+        
+        // Crear y agregar el indicador de versión
+        createVersionIndicator(headerLeft);
+        
         console.log('Selector de tema insertado en el header');
     } else {
         // Fallback: insertar como elemento flotante si no hay header
@@ -418,6 +507,127 @@ function debugThemeSelector() {
         currentTheme: currentTheme,
         hasListener: toggle ? toggle.hasAttribute('data-listener-added') : false
     };
+}
+
+// Crear indicador de versión
+function createVersionIndicator(container) {
+    // Verificar si ya existe
+    if (document.querySelector('.version-indicator')) {
+        return;
+    }
+    
+    const versionIndicator = document.createElement('div');
+    versionIndicator.className = 'version-indicator';
+    versionIndicator.textContent = SITE_VERSION;
+    versionIndicator.title = 'Ver historial de cambios';
+    
+    // Agregar event listener
+    versionIndicator.addEventListener('click', showChangelogModal);
+    
+    container.appendChild(versionIndicator);
+    console.log('Indicador de versión creado:', SITE_VERSION);
+}
+
+// Mostrar modal de changelog
+function showChangelogModal() {
+    // Crear modal si no existe
+    let modal = document.getElementById('changelog-modal');
+    if (!modal) {
+        modal = createChangelogModal();
+        document.body.appendChild(modal);
+    }
+    
+    // Mostrar modal
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Prevenir scroll del body
+    
+    // Agregar event listener para cerrar con ESC
+    document.addEventListener('keydown', handleChangelogEscape);
+}
+
+// Crear modal de changelog
+function createChangelogModal() {
+    const modal = document.createElement('div');
+    modal.id = 'changelog-modal';
+    modal.className = 'changelog-modal';
+    
+    const modalContent = document.createElement('div');
+    modalContent.className = 'changelog-modal-content';
+    
+    // Header del modal
+    const header = document.createElement('div');
+    header.className = 'changelog-header';
+    header.innerHTML = `
+        <h2>📋 Historial de Cambios</h2>
+        <button class="changelog-close" title="Cerrar">&times;</button>
+    `;
+    
+    // Body del modal
+    const body = document.createElement('div');
+    body.className = 'changelog-body';
+    
+    // Generar contenido del changelog
+    CHANGELOG.forEach(version => {
+        const versionDiv = document.createElement('div');
+        versionDiv.className = 'changelog-version';
+        
+        const versionHeader = document.createElement('div');
+        versionHeader.className = 'version-header';
+        versionHeader.innerHTML = `
+            <span class="version-number">${version.version}</span>
+        `;
+        
+        const changesList = document.createElement('ul');
+        changesList.className = 'changelog-list';
+        
+        version.changes.forEach(change => {
+            const listItem = document.createElement('li');
+            listItem.className = 'changelog-item';
+            listItem.innerHTML = `
+                <span class="changelog-text">${change.text}</span>
+            `;
+            changesList.appendChild(listItem);
+        });
+        
+        versionDiv.appendChild(versionHeader);
+        versionDiv.appendChild(changesList);
+        body.appendChild(versionDiv);
+    });
+    
+    modalContent.appendChild(header);
+    modalContent.appendChild(body);
+    modal.appendChild(modalContent);
+    
+    // Event listeners para cerrar
+    const closeBtn = header.querySelector('.changelog-close');
+    closeBtn.addEventListener('click', hideChangelogModal);
+    
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            hideChangelogModal();
+        }
+    });
+    
+    return modal;
+}
+
+// Ocultar modal de changelog
+function hideChangelogModal() {
+    const modal = document.getElementById('changelog-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; // Restaurar scroll del body
+    }
+    
+    // Remover event listener de ESC
+    document.removeEventListener('keydown', handleChangelogEscape);
+}
+
+// Manejar tecla ESC para cerrar modal
+function handleChangelogEscape(e) {
+    if (e.key === 'Escape') {
+        hideChangelogModal();
+    }
 }
 
 // Exponer función de debug globalmente

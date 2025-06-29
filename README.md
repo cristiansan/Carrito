@@ -17,7 +17,7 @@ Sistema de tienda online con autenticación Firebase, gestión de inventario y s
 
 ### ¿Cómo funciona?
 
-1. **Selector flotante**: Botón fijo en la esquina superior derecha
+1. **Selector integrado**: Botón en el header junto al título "Carrito"
 2. **Cambio instantáneo**: Transición suave entre temas
 3. **Persistencia**: La preferencia se guarda en localStorage
 4. **Detección automática**: Respeta la preferencia del sistema operativo
@@ -43,6 +43,40 @@ setTheme('dark') // o 'light'
 // Usar tema del sistema operativo
 useSystemTheme()
 ```
+
+## Nueva Funcionalidad: Indicador de Versión y Changelog
+
+### ¿Cómo funciona?
+
+1. **Indicador de versión**: Muestra la versión actual (v0.1.0) junto al selector de tema
+2. **Modal de changelog**: Al hacer clic se abre un modal con el historial completo de cambios
+3. **Organización por versiones**: Cada versión tiene fecha y lista de mejoras
+4. **Iconos descriptivos**: Cada cambio tiene un emoji que representa el tipo de mejora
+5. **Navegación intuitiva**: Se puede cerrar con ESC, clic fuera del modal o botón de cerrar
+
+### Características del changelog
+
+- 📋 **Historial completo**: Todas las funcionalidades y mejoras implementadas
+- 🔢 **Versiones incrementales**: Cada mejora tiene su propia versión numerada
+- 🎨 **Diseño limpio**: Modal minimalista con foco en el contenido
+- 📱 **Responsivo**: Se adapta perfectamente a dispositivos móviles
+- ⌨️ **Accesibilidad**: Soporte para navegación con teclado
+
+### Versiones disponibles
+
+- **v0.1.12**: Modal de historial de cambios y versiones
+- **v0.1.11**: Selector de tema oscuro/claro integrado en header
+- **v0.1.10**: Indicadores visuales de stock (verde/amarillo/rojo)
+- **v0.1.9**: Validaciones de stock y productos disponibles
+- **v0.1.8**: Gestión de stock temporal en tiempo real
+- **v0.1.7**: Sistema de filtros avanzado por modelo y capacidad
+- **v0.1.6**: Sistema de envío de pedidos por Email y WhatsApp
+- **v0.1.5**: Carrito de compras funcional con persistencia
+- **v0.1.4**: Diseño completamente responsivo para múltiples dispositivos
+- **v0.1.3**: Conversión de Excel a JSON para mejorar velocidad de carga
+- **v0.1.2**: Listado de productos leído desde archivo Excel
+- **v0.1.1**: Sistema de autenticación con Firebase
+- **v0.1.0**: Lanzamiento inicial del sitio web de Carrito
 
 ## Nueva Funcionalidad: Gestión de Stock Temporal
 
@@ -211,4 +245,4 @@ Para soporte o consultas, contactar a través de:
 
 ---
 
-*Última actualización: Enero 2025* 
+*Última actualización: 17 de Junio 2025* 
