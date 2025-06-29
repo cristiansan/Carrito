@@ -218,12 +218,14 @@ function mostrarProductos() {
             </p>
             <div class="producto-precio">$${precioFinal.toFixed(2)}</div>
             ${margenUsuario > 0 ? `<small style="color: #666;">(Precio base: $${producto.precioBase.toFixed(2)} + ${margenUsuario}%)</small>` : ''}
-            <div style="margin-top: 15px;">
+            <div class="producto-actions">
                 <label for="cantidad-${producto.id}">Cantidad:</label>
-                <input type="number" id="cantidad-${producto.id}" class="cantidad-input" value="1" min="1" max="99">
-                <button onclick="agregarAlCarrito(${producto.id})" class="btn-primary" style="margin-left: 10px;">
-                    Agregar al Carrito
-                </button>
+                <div class="cantidad-boton-container">
+                    <input type="number" id="cantidad-${producto.id}" class="cantidad-input" value="1" min="1" max="99">
+                    <button onclick="agregarAlCarrito(${producto.id})" class="btn-primary">
+                        Agregar al Carrito
+                    </button>
+                </div>
             </div>
         `;
         
@@ -401,12 +403,14 @@ function mostrarProductosFiltrados() {
             </p>
             <div class="producto-precio">$${precioFinal.toFixed(2)}</div>
             ${margenUsuario > 0 ? `<small style="color: #666;">(Precio base: $${producto.precioBase.toFixed(2)} + ${margenUsuario}%)</small>` : ''}
-            <div style="margin-top: 15px;">
+            <div class="producto-actions">
                 <label for="cantidad-${producto.id}">Cantidad:</label>
-                <input type="number" id="cantidad-${producto.id}" class="cantidad-input" value="1" min="1" max="99">
-                <button onclick="agregarAlCarrito(${producto.id})" class="btn-primary" style="margin-left: 10px;">
-                    Agregar al Carrito
-                </button>
+                <div class="cantidad-boton-container">
+                    <input type="number" id="cantidad-${producto.id}" class="cantidad-input" value="1" min="1" max="99">
+                    <button onclick="agregarAlCarrito(${producto.id})" class="btn-primary">
+                        Agregar al Carrito
+                    </button>
+                </div>
             </div>
         `;
         
