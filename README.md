@@ -11,6 +11,38 @@ Sistema de tienda online con autenticación Firebase, gestión de inventario y s
 - **Sistema de pedidos**: Envío por EmailJS y WhatsApp
 - **Diseño responsivo**: Optimizado para móviles y escritorio
 - **Márgenes por cliente**: Precios diferenciados según el usuario
+- **Selector de tema**: Cambio entre tema oscuro y claro con persistencia
+
+## Nueva Funcionalidad: Selector de Tema Oscuro/Claro
+
+### ¿Cómo funciona?
+
+1. **Selector flotante**: Botón fijo en la esquina superior derecha
+2. **Cambio instantáneo**: Transición suave entre temas
+3. **Persistencia**: La preferencia se guarda en localStorage
+4. **Detección automática**: Respeta la preferencia del sistema operativo
+5. **Responsivo**: Se adapta a dispositivos móviles
+
+### Temas disponibles
+
+- 🌙 **Tema Oscuro**: Colores oscuros para reducir fatiga visual
+- ☀️ **Tema Claro**: Colores claros para mejor visibilidad diurna
+
+### Funciones de administración
+
+```javascript
+// Cambiar tema manualmente
+toggleTheme()
+
+// Obtener tema actual
+getCurrentTheme()
+
+// Establecer tema específico
+setTheme('dark') // o 'light'
+
+// Usar tema del sistema operativo
+useSystemTheme()
+```
 
 ## Nueva Funcionalidad: Gestión de Stock Temporal
 

@@ -186,15 +186,195 @@ function applyComponentStyles() {
     });
 }
 
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    loadDesignConfig();
+// Gestión de temas y diseño
+
+// Clave para localStorage del tema
+const THEME_STORAGE_KEY = 'carrito_theme';
+
+// Tema por defecto
+const DEFAULT_THEME = 'dark';
+
+// Variable para el tema actual
+let currentTheme = DEFAULT_THEME;
+
+// Inicializar sistema de temas
+function initThemeSystem() {
+    // Cargar tema guardado o usar por defecto
+    const savedTheme = localStorage.getItem(THEME_STORAGE_KEY) || DEFAULT_THEME;
+    currentTheme = savedTheme;
     
-    // Aplicar estilos después de un pequeño delay para asegurar que todos los elementos estén cargados
-    setTimeout(() => {
-        applyComponentStyles();
-    }, 500);
+    // Aplicar tema al documento
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    // Crear selector de tema
+    createThemeSelector();
+    
+    // Actualizar interfaz
+    updateThemeSelector();
+    
+    console.log(`Tema inicializado: ${currentTheme}`);
+}
+
+// Crear el selector de tema
+function createThemeSelector() {
+    // Verificar si ya existe
+    if (document.querySelector('.theme-selector')) {
+        return;
+    }
+    
+    const themeSelector = document.createElement('div');
+    themeSelector.className = 'theme-selector';
+    themeSelector.innerHTML = `
+        <button class="theme-toggle" title="Cambiar tema">
+            <span class="theme-icon">🌙</span>
+            <span class="theme-text">Oscuro</span>
+        </button>
+    `;
+    
+    // Intentar insertar en el header primero
+    const header = document.querySelector('header .container');
+    const headerTitle = document.querySelector('header h1');
+    
+    if (header && headerTitle) {
+        // Crear contenedor para el lado izquierdo del header si no existe
+        let headerLeft = header.querySelector('.header-left');
+        if (!headerLeft) {
+            headerLeft = document.createElement('div');
+            headerLeft.className = 'header-left';
+            headerLeft.appendChild(headerTitle);
+            header.insertBefore(headerLeft, header.firstChild);
+        }
+        
+        // Insertar el selector después del título
+        headerLeft.appendChild(themeSelector);
+        console.log('Selector de tema insertado en el header');
+    } else {
+        // Fallback: insertar como elemento flotante si no hay header
+        document.body.appendChild(themeSelector);
+        themeSelector.style.position = 'fixed';
+        themeSelector.style.top = '20px';
+        themeSelector.style.left = '20px';
+        themeSelector.style.zIndex = '1000';
+        console.log('Selector de tema insertado como elemento flotante');
+    }
+    
+    // Agregar event listener al botón
+    const toggleButton = themeSelector.querySelector('.theme-toggle');
+    if (toggleButton) {
+        toggleButton.addEventListener('click', toggleTheme);
+        toggleButton.setAttribute('data-listener-added', 'true');
+        console.log('Event listener del selector de tema agregado');
+    }
+}
+
+// Alternar entre tema oscuro y claro
+function toggleTheme() {
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    // Aplicar nuevo tema
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    // Guardar en localStorage
+    localStorage.setItem(THEME_STORAGE_KEY, currentTheme);
+    
+    // Actualizar interfaz del selector
+    updateThemeSelector();
+    
+    console.log(`Tema cambiado a: ${currentTheme}`);
+}
+
+// Actualizar la interfaz del selector de tema
+function updateThemeSelector() {
+    const themeIcon = document.querySelector('.theme-icon');
+    const themeText = document.querySelector('.theme-text');
+    const themeToggle = document.querySelector('.theme-toggle');
+    
+    if (themeIcon && themeText) {
+        if (currentTheme === 'dark') {
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Oscuro';
+        } else {
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Claro';
+        }
+    }
+    
+    // Asegurar que el event listener esté presente
+    if (themeToggle && !themeToggle.hasAttribute('data-listener-added')) {
+        themeToggle.addEventListener('click', toggleTheme);
+        themeToggle.setAttribute('data-listener-added', 'true');
+        console.log('Event listener del tema restablecido');
+    }
+}
+
+// Funciones de mensaje eliminadas (según solicitud del usuario)
+
+// Obtener tema actual
+function getCurrentTheme() {
+    return currentTheme;
+}
+
+// Establecer tema específico
+function setTheme(theme) {
+    if (theme === 'dark' || theme === 'light') {
+        currentTheme = theme;
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        localStorage.setItem(THEME_STORAGE_KEY, currentTheme);
+        updateThemeSelector();
+        console.log(`Tema establecido manualmente: ${currentTheme}`);
+    } else {
+        console.error('Tema no válido. Use "dark" o "light".');
+    }
+}
+
+// Detectar preferencia del sistema
+function detectSystemTheme() {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+    } else {
+        return 'light';
+    }
+}
+
+// Usar tema del sistema si no hay preferencia guardada
+function useSystemTheme() {
+    const systemTheme = detectSystemTheme();
+    setTheme(systemTheme);
+}
+
+// Escuchar cambios en la preferencia del sistema
+function listenToSystemTheme() {
+    if (window.matchMedia) {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addListener((e) => {
+            if (!localStorage.getItem(THEME_STORAGE_KEY)) {
+                // Solo cambiar automáticamente si no hay preferencia guardada
+                const newTheme = e.matches ? 'dark' : 'light';
+                setTheme(newTheme);
+            }
+        });
+    }
+}
+
+// Exponer funciones globalmente (solo las necesarias para uso externo)
+window.getCurrentTheme = getCurrentTheme;
+window.setTheme = setTheme;
+window.useSystemTheme = useSystemTheme;
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    initThemeSystem();
+    listenToSystemTheme();
 });
+
+// También inicializar inmediatamente para evitar flash
+if (document.readyState === 'loading') {
+    // Si el documento aún se está cargando, esperar a DOMContentLoaded
+} else {
+    // Si el documento ya está cargado, inicializar inmediatamente
+    initThemeSystem();
+    listenToSystemTheme();
+}
 
 // Observar cambios en el DOM para aplicar estilos a elementos nuevos
 const observer = new MutationObserver((mutations) => {
@@ -212,4 +392,33 @@ const observer = new MutationObserver((mutations) => {
 observer.observe(document.body, {
     childList: true,
     subtree: true
-}); 
+});
+
+// Función de debug para verificar el estado del selector de tema
+function debugThemeSelector() {
+    const selector = document.querySelector('.theme-selector');
+    const toggle = document.querySelector('.theme-toggle');
+    const icon = document.querySelector('.theme-icon');
+    const text = document.querySelector('.theme-text');
+    
+    console.log('=== DEBUG SELECTOR DE TEMA ===');
+    console.log('Selector existe:', !!selector);
+    console.log('Toggle existe:', !!toggle);
+    console.log('Icon existe:', !!icon);
+    console.log('Text existe:', !!text);
+    console.log('Tema actual:', currentTheme);
+    console.log('Listener agregado:', toggle ? toggle.hasAttribute('data-listener-added') : 'N/A');
+    console.log('=== FIN DEBUG ===');
+    
+    return {
+        selector: !!selector,
+        toggle: !!toggle,
+        icon: !!icon,
+        text: !!text,
+        currentTheme: currentTheme,
+        hasListener: toggle ? toggle.hasAttribute('data-listener-added') : false
+    };
+}
+
+// Exponer función de debug globalmente
+window.debugThemeSelector = debugThemeSelector; 
