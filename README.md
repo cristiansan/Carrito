@@ -1,191 +1,182 @@
-# Carrito - Sitio Web Estático
+# Carrito - Sistema de Tienda Online
 
-Sitio web estático para tienda online con autenticación Firebase, catálogo de productos y sistema de pedidos.
+Sistema de tienda online con autenticación Firebase, gestión de inventario y sistema de pedidos.
 
-## Estructura del Proyecto
+## Características Principales
 
-```
-Carrito/
-├── public/
-│   ├── index.html          # Página de login
-│   ├── catalogo.html       # Catálogo y carrito
-│   └── gracias.html        # Página de confirmación
-├── src/
-│   ├── scripts/
-│   │   ├── auth.js         # Autenticación Firebase
-│   │   ├── catalogo.js     # Gestión del catálogo
-│   │   ├── carrito.js      # Carrito de compras
-│   │   └── emailjs.js      # Envío de emails
-│   └── styles/
-│       └── main.css        # Estilos CSS
-├── data/
-│   ├── productos.json      # Catálogo de productos
-│   └── clientes.json       # Configuración de márgenes
-└── README.md
-```
+- **Autenticación con Firebase Auth**: Login seguro con email/contraseña
+- **Catálogo de productos**: Visualización de productos con filtros y búsqueda
+- **Gestión de stock temporal**: El stock se reduce automáticamente al agregar productos al carrito
+- **Carrito de compras**: Gestión completa del carrito con localStorage
+- **Sistema de pedidos**: Envío por EmailJS y WhatsApp
+- **Diseño responsivo**: Optimizado para móviles y escritorio
+- **Márgenes por cliente**: Precios diferenciados según el usuario
 
-## Configuración Inicial
+## Nueva Funcionalidad: Gestión de Stock Temporal
 
-### 1. Firebase Authentication
+### ¿Cómo funciona?
 
-1. Crear proyecto en [Firebase Console](https://console.firebase.google.com/)
-2. Habilitar Authentication con Email/Password
-3. Crear usuarios en la consola de Firebase
-4. Reemplazar la configuración en `public/index.html` y `public/catalogo.html`:
+1. **Stock disponible**: Cada producto muestra su stock disponible en tiempo real
+2. **Reducción automática**: Al agregar un producto al carrito, el stock disponible se reduce automáticamente
+3. **Validación**: No se pueden agregar más productos de los disponibles
+4. **Persistencia**: El stock temporal se mantiene durante la sesión del usuario
+5. **Restauración**: Al eliminar productos del carrito, el stock se restaura automáticamente
+
+### Indicadores visuales
+
+- 🟢 **Stock OK**: Productos con stock suficiente (>5 unidades)
+- 🟡 **Stock Bajo**: Productos con stock limitado (≤5 unidades)
+- 🔴 **Agotado**: Productos sin stock disponible
+
+### Funciones de administración
 
 ```javascript
+// Ver información del stock temporal
+obtenerInfoStockTemporal()
+
+// Limpiar completamente el stock temporal
+limpiarStockTemporal()
+
+// Verificar stock disponible de un producto
+obtenerStockDisponible(productoId)
+```
+
+## Configuración
+
+### 1. Firebase Setup
+```javascript
+// Configurar en src/scripts/auth.js
 const firebaseConfig = {
     apiKey: "tu-api-key",
-    authDomain: "tu-proyecto.firebaseapp.com",
-    projectId: "tu-proyecto-id",
-    storageBucket: "tu-proyecto.appspot.com",
-    messagingSenderId: "123456789",
-    appId: "tu-app-id"
+    authDomain: "tu-dominio.firebaseapp.com",
+    // ... resto de configuración
 };
 ```
 
-### 2. EmailJS (Opcional)
-
-1. Crear cuenta en [EmailJS](https://www.emailjs.com/)
-2. Configurar servicio de email (Gmail, Outlook, etc.)
-3. Crear template de email
-4. Reemplazar configuración en `src/scripts/emailjs.js`:
-
-```javascript
-const EMAILJS_CONFIG = {
-    publicKey: 'tu-public-key',
-    serviceId: 'tu-service-id',
-    templateId: 'tu-template-id'
-};
+### 2. Estructura de archivos
+```
+Carrito/
+├── index.html                 # Página de login
+├── public/
+│   ├── index.html            # Página principal
+│   ├── catalogo.html         # Catálogo de productos
+│   └── gracias.html          # Página de confirmación
+├── src/
+│   ├── scripts/
+│   │   ├── auth.js           # Autenticación Firebase
+│   │   ├── catalogo.js       # Gestión del catálogo y stock
+│   │   ├── carrito.js        # Gestión del carrito
+│   │   └── emailjs.js        # Envío de emails
+│   └── styles/
+│       └── main.css          # Estilos principales
+└── data/
+    ├── productos.json        # Base de datos de productos
+    └── clientes.json         # Configuración de márgenes
 ```
 
-### 3. WhatsApp
-
-Editar el número de WhatsApp en `src/scripts/carrito.js`:
-
-```javascript
-const numeroWhatsApp = '+1234567890'; // Tu número de WhatsApp
-```
-
-### 4. Personalizar Productos
-
-Editar `data/productos.json` con tus productos:
-
+### 3. Formato de productos
 ```json
 {
-    "id": 1,
-    "nombre": "Nombre del Producto",
-    "imagen": "URL de la imagen",
-    "descripcion": "Descripción del producto",
-    "precioBase": 100.00
+  "id": 1,
+  "nombre": "iPhone 13 128GB Azul",
+  "imagen": "https://ejemplo.com/imagen.jpg",
+  "descripcion": "Descripción del producto",
+  "precioBase": 1000.0,
+  "codigo": "IPH13128BLUE",
+  "stock": 50,
+  "transit": 10,
+  "categoria": "iPhone 13"
 }
 ```
 
-### 5. Configurar Márgenes de Clientes
-
-Editar `data/clientes.json` con los emails y márgenes de tus clientes:
-
+### 4. Configuración de clientes
 ```json
 {
-    "cliente@ejemplo.com": {
-        "margen": 15,
-        "nombre": "Nombre del Cliente",
-        "descripcion": "Cliente con margen del 15%"
-    }
+  "usuario@ejemplo.com": { "margen": 15 },
+  "admin@ejemplo.com": { "margen": 0 },
+  "default": { "margen": 10 }
 }
 ```
 
-## Funcionalidades
+## Uso
 
-### Autenticación
-- Login con Firebase Auth
-- Redirección automática según estado de autenticación
-- Mostrar nombre del usuario logueado
-- Botón de cerrar sesión
+### Para usuarios finales
 
-### Catálogo
-- Carga productos desde JSON
-- Aplicación automática de márgenes por cliente
-- Interfaz responsive
-- Agregar productos al carrito
+1. **Iniciar sesión**: Usar email y contraseña registrados
+2. **Explorar catálogo**: Navegar por los productos disponibles
+3. **Agregar al carrito**: Seleccionar cantidad y agregar productos
+4. **Gestionar carrito**: Modificar cantidades o eliminar productos
+5. **Realizar pedido**: Enviar por WhatsApp o email
 
-### Carrito de Compras
-- Persistencia en localStorage
-- Actualizar cantidades
-- Eliminar productos
-- Calcular totales automáticamente
+### Para administradores
 
-### Envío de Pedidos
-- Envío por WhatsApp con mensaje prearmado
-- Envío por email usando EmailJS
-- Página de confirmación
+1. **Gestionar productos**: Editar `data/productos.json`
+2. **Configurar márgenes**: Editar `data/clientes.json`
+3. **Monitorear stock**: Usar funciones de debugging en consola
+4. **Resetear stock**: Usar `limpiarStockTemporal()` si es necesario
+
+## Tecnologías utilizadas
+
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Autenticación**: Firebase Auth
+- **Almacenamiento**: localStorage
+- **Comunicación**: EmailJS, WhatsApp API
+- **Diseño**: CSS Grid, Flexbox, Responsive Design
 
 ## Despliegue
 
-### Firebase Hosting
+### GitHub Pages
+El sitio está configurado para funcionar en GitHub Pages:
+- URL: `https://tuusuario.github.io/Carrito/`
+- Archivos necesarios en la raíz del repositorio
+
+### Local
 ```bash
-npm install -g firebase-tools
-firebase login
-firebase init hosting
-firebase deploy
+# Clonar repositorio
+git clone https://github.com/tuusuario/Carrito.git
+
+# Abrir con servidor local
+python -m http.server 8000
+# o
+npx http-server
 ```
 
-### GitHub Pages
-1. Subir archivos a repositorio GitHub
-2. Habilitar GitHub Pages en configuración del repositorio
-3. Seleccionar rama y carpeta
+## Troubleshooting
 
-### Netlify
-1. Conectar repositorio GitHub con Netlify
-2. Configurar directorio de publicación como raíz
-3. Deploy automático
+### Problemas comunes
 
-## Personalización
+1. **Stock no se actualiza**: Verificar que las funciones estén expuestas globalmente
+2. **Productos no cargan**: Verificar rutas de `productos.json`
+3. **Login no funciona**: Verificar configuración de Firebase
+4. **Stock temporal persistente**: Usar `limpiarStockTemporal()` para resetear
 
-### Cambiar Estilos
-Editar `src/styles/main.css` para personalizar:
-- Colores
-- Fuentes
-- Layout
-- Efectos
+### Logs útiles
 
-### Agregar Funcionalidades
-- Filtros de productos
-- Búsqueda
-- Categorías
-- Promociones
-- Descuentos
+```javascript
+// Ver stock temporal actual
+console.log(obtenerInfoStockTemporal());
 
-## Notas Importantes
+// Ver productos en carrito
+console.log(JSON.parse(localStorage.getItem('tienda_carrito')));
 
-1. **Seguridad**: Este es un sitio estático, la configuración de Firebase es visible. Configurar reglas de seguridad apropiadas.
+// Ver stock temporal en localStorage
+console.log(JSON.parse(localStorage.getItem('tienda_stock_temporal')));
+```
 
-2. **CORS**: Para desarrollo local, usar un servidor HTTP (no abrir archivos directamente):
-   ```bash
-   # Python
-   python -m http.server 8000
-   
-   # Node.js
-   npx http-server
-   
-   # PHP
-   php -S localhost:8000
-   ```
+## Próximas mejoras
 
-3. **Imágenes**: Reemplazar URLs de placeholder con imágenes reales
+- [ ] Integración con base de datos real
+- [ ] Sistema de reservas por tiempo limitado
+- [ ] Notificaciones push para stock bajo
+- [ ] Panel de administración web
+- [ ] Sistema de descuentos y promociones
 
-4. **Email**: Configurar template en EmailJS para recibir pedidos
+## Contacto
 
-5. **Precios**: Los precios se calculan como: `precioFinal = precioBase * (1 + margen / 100)`
+Para soporte o consultas, contactar a través de:
+- WhatsApp: +54 11 6625-1922
+- Email: configurar en EmailJS
 
-## Soporte
+---
 
-Para dudas o problemas:
-1. Verificar configuración de Firebase
-2. Revisar console del navegador para errores
-3. Confirmar que los archivos JSON son válidos
-4. Probar en servidor HTTP local
-
-## Licencia
-
-Este proyecto es de uso libre para fines comerciales y personales. 
+*Última actualización: Enero 2025* 

@@ -36,12 +36,18 @@ function redirectToCatalog() {
 function redirectToLogin() {
     // Detectar si estamos en GitHub Pages o en local
     const isGitHubPages = window.location.hostname.includes('github.io');
+    const currentPath = window.location.pathname;
     
     if (isGitHubPages) {
         window.location.href = '/Carrito/';
     } else {
-        // En local, ir a la raíz
-        window.location.href = '/';
+        // Si estamos en /public/, ir al index.html de la raíz
+        if (currentPath.includes('/public/')) {
+            window.location.href = '../index.html';
+        } else {
+            // Si ya estamos en la raíz, recargar index.html
+            window.location.href = 'index.html';
+        }
     }
 }
 
@@ -230,9 +236,9 @@ function irALogin() {
         window.location.href = '/Carrito/';
     } else {
         if (currentPath.includes('/public/')) {
-            window.location.href = 'index.html';
+            window.location.href = '../index.html';
         } else {
-            window.location.href = '/';
+            window.location.href = 'index.html';
         }
     }
 }
@@ -269,17 +275,34 @@ function iniciarSesion(email, password) {
 // Función para cerrar sesión
 function cerrarSesion() {
     console.log('Función cerrarSesion llamada');
+    
+    // Enfocar la ventana para evitar problemas con confirm/alert
+    window.focus();
+    
     firebase.auth().signOut().then(() => {
-        console.log('Sesión cerrada');
+        console.log('Sesión cerrada exitosamente');
+        
+        // Limpiar datos locales relacionados con la sesión
+        if (typeof limpiarStockTemporal === 'function') {
+            limpiarStockTemporal();
+        }
+        
         // Si estamos en el catálogo, mostrar estado de invitado
         if (isCatalogPage()) {
             mostrarBotonesInvitado();
+            // Mostrar mensaje de confirmación
+            setTimeout(() => {
+                if (typeof mostrarMensajeTemp === 'function') {
+                    mostrarMensajeTemp('Sesión cerrada. Ahora navegas como invitado.');
+                }
+            }, 500);
         } else {
             // Si estamos en otra página, ir al login
             redirectToLogin();
         }
     }).catch((error) => {
         console.error('Error al cerrar sesión:', error);
+        alert('Error al cerrar sesión. Intenta nuevamente.');
     });
 }
 

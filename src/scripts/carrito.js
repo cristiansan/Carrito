@@ -54,6 +54,18 @@ function addToCart(item) {
 
 // Eliminar item del carrito
 function eliminarDelCarrito(productoId) {
+    // Encontrar el item antes de eliminarlo para restaurar el stock
+    const item = carrito.find(cartItem => cartItem.id === productoId);
+    if (item) {
+        // Restaurar stock temporal
+        if (typeof restaurarStockTemporal === 'function') {
+            restaurarStockTemporal(productoId, item.cantidad);
+        }
+        
+        // Actualizar vista de productos en el catálogo si existe la función
+        actualizarVistaProductos();
+    }
+    
     carrito = carrito.filter(item => item.id !== productoId);
     guardarCarrito();
     actualizarVistaCarrito();
@@ -66,21 +78,66 @@ function actualizarCantidad(productoId, nuevaCantidad) {
         if (nuevaCantidad <= 0) {
             eliminarDelCarrito(productoId);
         } else {
+            const cantidadAnterior = item.cantidad;
+            const diferencia = nuevaCantidad - cantidadAnterior;
+            
+            // Si se está aumentando la cantidad, verificar stock disponible
+            if (diferencia > 0 && typeof obtenerStockDisponible === 'function') {
+                const stockDisponible = obtenerStockDisponible(productoId);
+                if (diferencia > stockDisponible) {
+                    alert(`Solo hay ${stockDisponible} unidades adicionales disponibles.`);
+                    return;
+                }
+                // Reducir stock temporal por la diferencia
+                if (typeof reducirStockTemporal === 'function') {
+                    reducirStockTemporal(productoId, diferencia);
+                }
+            } else if (diferencia < 0) {
+                // Si se está reduciendo la cantidad, restaurar stock temporal
+                if (typeof restaurarStockTemporal === 'function') {
+                    restaurarStockTemporal(productoId, Math.abs(diferencia));
+                }
+            }
+            
             item.cantidad = nuevaCantidad;
             item.subtotal = item.precio * item.cantidad;
             guardarCarrito();
             actualizarVistaCarrito();
+            
+            // Actualizar vista de productos
+            actualizarVistaProductos();
         }
     }
 }
 
 // Vaciar carrito
 function limpiarCarrito() {
-    if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
-        carrito = [];
-        guardarCarrito();
-        actualizarVistaCarrito();
-    }
+    // Asegurar que la ventana esté enfocada antes del confirm
+    window.focus();
+    
+    // Usar setTimeout para asegurar que el confirm se ejecute después del focus
+    setTimeout(() => {
+        if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
+            // Restaurar todo el stock temporal antes de limpiar
+            if (typeof restaurarStockTemporal === 'function') {
+                carrito.forEach(item => {
+                    restaurarStockTemporal(item.id, item.cantidad);
+                });
+            }
+            
+            carrito = [];
+            guardarCarrito();
+            actualizarVistaCarrito();
+            
+            // Actualizar vista de productos
+            actualizarVistaProductos();
+            
+            // Mostrar mensaje de confirmación
+            if (typeof mostrarMensajeTemp === 'function') {
+                mostrarMensajeTemp('Carrito vaciado y stock restaurado');
+            }
+        }
+    }, 100);
 }
 
 // Calcular total del carrito
@@ -231,12 +288,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.open(whatsappUrl, '_blank');
                 cerrarModal();
                 
-                // Preguntar si quiere limpiar el carrito
+                // Preguntar si quiere limpiar el carrito después de enviar el pedido
                 setTimeout(() => {
                     if (confirm('¿Quieres vaciar el carrito después de enviar el pedido?')) {
+                        // Limpiar stock temporal (el pedido ya se envió, así que no restauramos stock)
+                        if (typeof localStorage !== 'undefined') {
+                            localStorage.removeItem('tienda_stock_temporal');
+                        }
+                        if (typeof stockTemporal !== 'undefined') {
+                            stockTemporal = {};
+                        }
+                        
                         carrito = [];
                         guardarCarrito();
                         actualizarVistaCarrito();
+                        
+                        // Actualizar vista de productos para mostrar stock original
+                        actualizarVistaProductos();
+                        
+                        // Mostrar mensaje de confirmación
+                        if (typeof mostrarMensajeTemp === 'function') {
+                            mostrarMensajeTemp('Pedido enviado y carrito vaciado. Stock restaurado.');
+                        }
                     }
                 }, 1000);
             });
@@ -330,13 +403,9 @@ function actualizarVistaCarritoFlotante() {
 
 // Función para restablecer event listeners después de actualizar el carrito
 function restablecerEventListeners() {
-    // Restablecer event listener del botón logout si existe
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn && logoutBtn.style.display !== 'none') {
-        logoutBtn.removeEventListener('click', cerrarSesion);
-        logoutBtn.addEventListener('click', cerrarSesion);
-        console.log('Event listener del logout restablecido desde carrito');
-    }
+    // NO restablecer el event listener del logout aquí
+    // El auth.js ya se encarga de esto y duplicarlo causa problemas
+    console.log('Event listeners del carrito restablecidos (logout omitido)');
 }
 
 // Funciones para modal de login requerido
@@ -353,8 +422,6 @@ function cerrarModalLoginRequerido() {
         modal.style.display = 'none';
     }
 }
-
-
 
 // Event listeners adicionales para carrito flotante
 document.addEventListener('DOMContentLoaded', function() {
@@ -375,4 +442,19 @@ document.addEventListener('DOMContentLoaded', function() {
             cerrarCarritoFlotante();
         });
     }
-}); 
+});
+
+// Función auxiliar para actualizar vista de productos
+function actualizarVistaProductos() {
+    // Intentar actualizar la vista de productos si estamos en el catálogo
+    if (typeof mostrarProductos === 'function') {
+        // Verificar si hay filtros activos
+        if (typeof productosFiltrados !== 'undefined' && productosFiltrados.length > 0) {
+            if (typeof mostrarProductosFiltrados === 'function') {
+                mostrarProductosFiltrados();
+            }
+        } else {
+            mostrarProductos();
+        }
+    }
+} 

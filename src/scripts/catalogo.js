@@ -5,6 +5,63 @@ console.log('Cargando script catalogo.js...');
 let productos = [];
 let clientes = [];
 let margenUsuario = 0;
+let stockTemporal = {}; // Nueva variable para manejar stock temporal
+
+// Clave para localStorage del stock temporal
+const STOCK_TEMPORAL_KEY = 'tienda_stock_temporal';
+
+// Inicializar stock temporal desde localStorage
+function inicializarStockTemporal() {
+    const stockGuardado = localStorage.getItem(STOCK_TEMPORAL_KEY);
+    if (stockGuardado) {
+        try {
+            stockTemporal = JSON.parse(stockGuardado);
+            console.log('Stock temporal cargado:', stockTemporal);
+        } catch (error) {
+            console.error('Error al cargar stock temporal:', error);
+            stockTemporal = {};
+        }
+    } else {
+        stockTemporal = {};
+    }
+}
+
+// Guardar stock temporal en localStorage
+function guardarStockTemporal() {
+    localStorage.setItem(STOCK_TEMPORAL_KEY, JSON.stringify(stockTemporal));
+}
+
+// Obtener stock disponible de un producto (considerando el stock temporal)
+function obtenerStockDisponible(productoId) {
+    const producto = productos.find(p => p.id === productoId);
+    if (!producto) return 0;
+    
+    const stockOriginal = producto.stock;
+    const stockReducido = stockTemporal[productoId] || 0;
+    return Math.max(0, stockOriginal - stockReducido);
+}
+
+// Reducir stock temporal de un producto
+function reducirStockTemporal(productoId, cantidad) {
+    if (!stockTemporal[productoId]) {
+        stockTemporal[productoId] = 0;
+    }
+    stockTemporal[productoId] += cantidad;
+    guardarStockTemporal();
+    console.log(`Stock temporal reducido para producto ${productoId}: -${cantidad}, total: ${stockTemporal[productoId]}`);
+}
+
+// Restaurar stock temporal de un producto
+function restaurarStockTemporal(productoId, cantidad) {
+    if (stockTemporal[productoId]) {
+        stockTemporal[productoId] = Math.max(0, stockTemporal[productoId] - cantidad);
+        if (stockTemporal[productoId] === 0) {
+            delete stockTemporal[productoId];
+        }
+        guardarStockTemporal();
+        console.log(`Stock temporal restaurado para producto ${productoId}: +${cantidad}`);
+    }
+}
 
 // Función de prueba inmediata
 function probarElementos() {
@@ -21,6 +78,9 @@ function probarElementos() {
 async function inicializarCatalogo() {
     console.log('Inicializando catálogo...');
     try {
+        // Inicializar stock temporal primero
+        inicializarStockTemporal();
+        
         // Cargar productos primero
         await cargarProductos();
         console.log('Productos cargados:', productos.length);
@@ -47,9 +107,12 @@ async function inicializarCatalogo() {
                 imagen: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=300&fit=crop",
                 descripcion: "Producto de ejemplo - Error al cargar datos reales",
                 precioBase: 1000,
-                codigo: "EJEMPLO-001"
+                codigo: "EJEMPLO-001",
+                stock: 10,
+                transit: 0
             }
         ];
+        inicializarStockTemporal();
         obtenerMargenUsuario();
         mostrarProductos();
     }
@@ -193,10 +256,18 @@ function mostrarProductos() {
     
     productos.forEach(producto => {
         const precioFinal = calcularPrecioFinal(producto.precioBase);
+        const stockDisponible = obtenerStockDisponible(producto.id);
         
         const productoCard = document.createElement('div');
         productoCard.className = 'producto-card';
         const esUrlImagen = producto.imagen && producto.imagen.startsWith('http');
+        
+        // Agregar clase para productos sin stock
+        if (stockDisponible <= 0) {
+            productoCard.classList.add('sin-stock');
+        } else if (stockDisponible <= 5) {
+            productoCard.classList.add('stock-bajo');
+        }
         
         productoCard.innerHTML = `
             ${esUrlImagen ? `
@@ -213,7 +284,10 @@ function mostrarProductos() {
             `}
             <h3 class="producto-nombre">${producto.nombre}</h3>
             <p class="producto-descripcion">
-                <strong>Stock:</strong> ${producto.stock > 0 ? producto.stock : 'Sin stock'}
+                <strong>Stock disponible:</strong> 
+                <span class="stock-info ${stockDisponible <= 0 ? 'sin-stock' : stockDisponible <= 5 ? 'stock-bajo' : 'stock-ok'}">
+                    ${stockDisponible > 0 ? stockDisponible : 'Agotado'}
+                </span>
                 ${producto.transit > 0 ? ` | <strong>En tránsito:</strong> ${producto.transit}` : ''}
             </p>
             <div class="producto-precio">$${precioFinal.toFixed(2)}</div>
@@ -221,9 +295,12 @@ function mostrarProductos() {
             <div class="producto-actions">
                 <label for="cantidad-${producto.id}">Cantidad:</label>
                 <div class="cantidad-boton-container">
-                    <input type="number" id="cantidad-${producto.id}" class="cantidad-input" value="1" min="1" max="99">
-                    <button onclick="agregarAlCarrito(${producto.id})" class="btn-primary">
-                        Agregar al Carrito
+                    <input type="number" id="cantidad-${producto.id}" class="cantidad-input" 
+                           value="1" min="1" max="${Math.max(1, stockDisponible)}" 
+                           ${stockDisponible <= 0 ? 'disabled' : ''}>
+                    <button onclick="agregarAlCarrito(${producto.id})" class="btn-primary"
+                            ${stockDisponible <= 0 ? 'disabled' : ''}>
+                        ${stockDisponible <= 0 ? 'Sin Stock' : 'Agregar al Carrito'}
                     </button>
                 </div>
             </div>
@@ -246,6 +323,20 @@ function agregarAlCarrito(productoId) {
         return;
     }
     
+    // Verificar stock disponible
+    const stockDisponible = obtenerStockDisponible(productoId);
+    if (stockDisponible <= 0) {
+        alert(`${producto.nombre} no tiene stock disponible.`);
+        return;
+    }
+    
+    if (cantidad > stockDisponible) {
+        alert(`Solo hay ${stockDisponible} unidades disponibles de ${producto.nombre}.`);
+        // Ajustar la cantidad al máximo disponible
+        cantidadInput.value = stockDisponible;
+        return;
+    }
+    
     const precioFinal = calcularPrecioFinal(producto.precioBase);
     
     const item = {
@@ -256,6 +347,9 @@ function agregarAlCarrito(productoId) {
         subtotal: precioFinal * cantidad
     };
     
+    // Reducir stock temporal
+    reducirStockTemporal(productoId, cantidad);
+    
     // Agregar al carrito (función del carrito.js)
     if (typeof addToCart === 'function') {
         addToCart(item);
@@ -264,8 +358,15 @@ function agregarAlCarrito(productoId) {
     // Resetear cantidad
     cantidadInput.value = 1;
     
+    // Actualizar vista de productos para mostrar stock actualizado
+    if (typeof productosFiltrados !== 'undefined' && productosFiltrados.length > 0) {
+        mostrarProductosFiltrados();
+    } else {
+        mostrarProductos();
+    }
+    
     // Mostrar mensaje de confirmación
-    mostrarMensajeTemp(`${producto.nombre} agregado al carrito`);
+    mostrarMensajeTemp(`${producto.nombre} agregado al carrito (Stock restante: ${obtenerStockDisponible(productoId)})`);
 }
 
 // Mostrar mensaje temporal
@@ -378,10 +479,18 @@ function mostrarProductosFiltrados() {
     
     productosFiltrados.forEach(producto => {
         const precioFinal = calcularPrecioFinal(producto.precioBase);
+        const stockDisponible = obtenerStockDisponible(producto.id);
         
         const productoCard = document.createElement('div');
         productoCard.className = 'producto-card';
         const esUrlImagen = producto.imagen && producto.imagen.startsWith('http');
+        
+        // Agregar clase para productos sin stock
+        if (stockDisponible <= 0) {
+            productoCard.classList.add('sin-stock');
+        } else if (stockDisponible <= 5) {
+            productoCard.classList.add('stock-bajo');
+        }
         
         productoCard.innerHTML = `
             ${esUrlImagen ? `
@@ -398,7 +507,10 @@ function mostrarProductosFiltrados() {
             `}
             <h3 class="producto-nombre">${producto.nombre}</h3>
             <p class="producto-descripcion">
-                <strong>Stock:</strong> ${producto.stock > 0 ? producto.stock : 'Sin stock'}
+                <strong>Stock disponible:</strong> 
+                <span class="stock-info ${stockDisponible <= 0 ? 'sin-stock' : stockDisponible <= 5 ? 'stock-bajo' : 'stock-ok'}">
+                    ${stockDisponible > 0 ? stockDisponible : 'Agotado'}
+                </span>
                 ${producto.transit > 0 ? ` | <strong>En tránsito:</strong> ${producto.transit}` : ''}
             </p>
             <div class="producto-precio">$${precioFinal.toFixed(2)}</div>
@@ -406,9 +518,12 @@ function mostrarProductosFiltrados() {
             <div class="producto-actions">
                 <label for="cantidad-${producto.id}">Cantidad:</label>
                 <div class="cantidad-boton-container">
-                    <input type="number" id="cantidad-${producto.id}" class="cantidad-input" value="1" min="1" max="99">
-                    <button onclick="agregarAlCarrito(${producto.id})" class="btn-primary">
-                        Agregar al Carrito
+                    <input type="number" id="cantidad-${producto.id}" class="cantidad-input" 
+                           value="1" min="1" max="${Math.max(1, stockDisponible)}"
+                           ${stockDisponible <= 0 ? 'disabled' : ''}>
+                    <button onclick="agregarAlCarrito(${producto.id})" class="btn-primary"
+                            ${stockDisponible <= 0 ? 'disabled' : ''}>
+                        ${stockDisponible <= 0 ? 'Sin Stock' : 'Agregar al Carrito'}
                     </button>
                 </div>
             </div>
@@ -504,4 +619,47 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.log('No es página de catálogo, saltando inicialización');
     }
-}); 
+});
+
+// Limpiar completamente el stock temporal (útil para resetear todo)
+function limpiarStockTemporal() {
+    stockTemporal = {};
+    localStorage.removeItem(STOCK_TEMPORAL_KEY);
+    console.log('Stock temporal completamente limpiado');
+    
+    // Actualizar vista de productos
+    if (typeof productosFiltrados !== 'undefined' && productosFiltrados.length > 0) {
+        mostrarProductosFiltrados();
+    } else {
+        mostrarProductos();
+    }
+}
+
+// Obtener información del stock temporal (para debugging)
+function obtenerInfoStockTemporal() {
+    return {
+        stockTemporal: stockTemporal,
+        totalProductosAfectados: Object.keys(stockTemporal).length,
+        detalles: Object.entries(stockTemporal).map(([id, cantidad]) => {
+            const producto = productos.find(p => p.id == id);
+            return {
+                id: id,
+                nombre: producto ? producto.nombre : 'Producto desconocido',
+                cantidadReducida: cantidad,
+                stockOriginal: producto ? producto.stock : 0,
+                stockDisponible: obtenerStockDisponible(parseInt(id))
+            };
+        })
+    };
+}
+
+// Exponer funciones globalmente para que el carrito pueda acceder a ellas
+window.obtenerStockDisponible = obtenerStockDisponible;
+window.reducirStockTemporal = reducirStockTemporal;
+window.restaurarStockTemporal = restaurarStockTemporal;
+window.limpiarStockTemporal = limpiarStockTemporal;
+window.obtenerInfoStockTemporal = obtenerInfoStockTemporal;
+window.mostrarProductos = mostrarProductos;
+window.mostrarProductosFiltrados = mostrarProductosFiltrados;
+window.productosFiltrados = productosFiltrados;
+window.stockTemporal = stockTemporal; 

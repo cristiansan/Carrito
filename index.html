@@ -3,17 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito</title>
+    <title>Carrito - Iniciar Sesión</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛒</text></svg>">
-    <script>
-        // Redirigir automáticamente al catálogo
-        window.location.href = 'public/catalogo.html';
-    </script>
+    <link rel="stylesheet" href="src/styles/main.css">
 </head>
 <body>
-    <div style="text-align: center; padding: 50px;">
-        <h2>Redirigiendo al catálogo...</h2>
-        <p>Si no eres redirigido automáticamente, <a href="public/catalogo.html">haz clic aquí</a></p>
+    <div class="container">
+        <div class="login-form">
+            <h1>Carrito</h1>
+            <h2>Iniciar Sesión</h2>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" required>
+                </div>
+                
+                <button type="submit" id="loginBtn">Iniciar Sesión</button>
+            </form>
+            
+            <div id="error-message" class="error-message"></div>
+            <div id="loading" class="loading" style="display: none;">Iniciando sesión...</div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <p style="color: #666; font-size: 14px;">¿Solo quieres ver los productos?</p>
+                <a href="public/catalogo.html" style="color: #007bff; text-decoration: none; font-weight: 500;">Ver Catálogo como Invitado</a>
+            </div>
+        </div>
     </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
+    <!-- Tu configuración de Firebase -->
+    <script>
+        // Configuración de Firebase para Carrito
+        const firebaseConfig = {
+            apiKey: "AIzaSyCXjSGtVGfQas_cEyjmI0RTaeEl94jdp6g",
+            authDomain: "carrito-138c3.firebaseapp.com",
+            projectId: "carrito-138c3",
+            storageBucket: "carrito-138c3.firebasestorage.app",
+            messagingSenderId: "579670725719",
+            appId: "1:579670725719:web:74b5769e4bd365b4bfff12"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    
+    <script src="src/scripts/design.js"></script>
+    <script src="src/scripts/auth.js"></script>
 </body>
 </html> 
